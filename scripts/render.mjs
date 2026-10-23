@@ -27,10 +27,10 @@ export function renderPage(page, language = 'pt-BR') {
     <section class="secondary">${tagged('h2', 'secondary')}<ul>${secondary.map(entry => `<li>${item(entry)}</li>`).join('')}</ul></section>
     <section class="handle-list">${tagged('h2', 'handles')}<div>${handles.map(item).join(' ')}</div></section>`;
   } else if (page === 'privacy') {
-    const section = (id, heading, paragraphs) => `<section id="${id}">${tagged('h2', heading)}${paragraphs.map(key => tagged('p', key)).join('')}</section>`;
+    const section = (id, heading, paragraphs, ending = '') => `<section id="${id}">${tagged('h2', heading)}${paragraphs.map(key => tagged('p', key)).join('')}${ending}</section>`;
     content = `<article class="policy">${tagged('h1', 'privacy')}${tagged('p', 'updated', ' class="meta"')}${tagged('p', 'privacyIntro', ' class="intro"')}
     ${apps.map(app => `<section id="privacy-${app.id}"><h2>${escape(app.name)}</h2>${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n')}
-    ${section('common', 'commonTitle', ['common'])}${section('retention', 'retentionTitle', ['retention'])}${section('rights', 'rightsTitle', ['rights'])}${section('changes', 'changesTitle', ['changes'])}${link(site.contact, 'contact')}</article>`;
+    ${section('common', 'commonTitle', ['common'])}${section('retention', 'retentionTitle', ['retention'])}${section('rights', 'rightsTitle', ['rights'])}${section('changes', 'changesTitle', ['changes'], link(site.contact, 'contact'))}</article>`;
   } else {
     content = `<section class="hero"><p class="meta">404</p>${tagged('h1', 'notFound')}${tagged('p', 'notFoundDescription', ' class="intro"')}${link(site.home, 'home', 'button primary cast press')}</section>`;
   }

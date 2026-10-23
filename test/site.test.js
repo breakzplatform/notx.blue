@@ -148,3 +148,10 @@ test('app aliases are linked inside their cards in both languages', () => {
     }
   }
 });
+
+test('privacy contact belongs to the changes section', () => {
+  for (const language of Object.keys(dictionaries)) {
+    const section = renderPage('privacy', language).match(/<section id="changes">([\s\S]*?)<\/section>/)[1];
+    assert.match(section, /:<\/p><a href="mailto:abuse@notx.blue"/);
+  }
+});
