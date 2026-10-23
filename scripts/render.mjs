@@ -54,7 +54,7 @@ export function renderPage(page, language = 'pt-BR') {
   } else if (page === 'privacy') {
     const section = (id, heading, paragraphs, ending = '') => `<section id="${id}">${tagged('h2', heading)}${paragraphs.map(key => tagged('p', key)).join('')}${ending}</section>`;
     content = panel('privacy-title', 'privacy', `${tagged('p', 'updated', ' class="db-micro"')}${tagged('p', 'privacyIntro')}
-    ${apps.map(app => `<section id="privacy-${app.id}"><h2>${escape(app.name)}</h2>${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n    ')}
+    ${apps.filter(app => app.listed !== false).map(app => `<section id="privacy-${app.id}"><h2>${escape(app.name)}</h2>${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n    ')}
     ${section('common', 'commonTitle', ['common'])}${section('retention', 'retentionTitle', ['retention'])}${section('rights', 'rightsTitle', ['rights'])}${section('changes', 'changesTitle', ['changes'], link(site.contact, 'contact'))}`, { first: true, wrapper: 'article', headingTag: 'h1', bodyClasses: 'nx-policy p-4' });
   } else {
     content = panel('not-found-title', 'notFound', `${tagged('p', 'notFoundDescription', ' class="mb-5"')}${link(site.home, 'home', 'db-btn db-btn-primary cast press')}`, { first: true, headingTag: 'h1' });

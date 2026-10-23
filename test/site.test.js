@@ -75,7 +75,7 @@ test('privacy covers each app in both languages and is published at /privacy', a
     assert.match(html, /<title[^>]*>.+<\/title>/);
     assert.match(html, /<h1[^>]*>.+<\/h1>/);
     assert.match(html, /abuse@notx.blue/);
-    for (const app of apps) {
+    for (const app of apps.filter(app => app.listed !== false)) {
       assert.ok(html.includes(`id="privacy-${app.id}"`));
       assert.ok(html.includes(escape(translate(`privacy.${app.id}`, language))));
     }
@@ -220,7 +220,7 @@ test('home: one projects panel with the listed apps, then compact labels, bots a
   }
 });
 
-test('privacy still covers apps hidden from the home page', () => {
+test('privacy leaves out apps hidden from the home page', () => {
   const html = renderPage('privacy');
-  for (const id of ['enquete', 'trending']) assert.ok(html.includes(`id="privacy-${id}"`));
+  for (const id of ['enquete', 'trending']) assert.ok(!html.includes(`id="privacy-${id}"`));
 });

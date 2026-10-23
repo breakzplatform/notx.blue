@@ -8,9 +8,8 @@ export const site = {
 
 // Listed apps need an `ink`: a design-system ink name (resolved to --ink-<name>/--on-<name>) or
 // 'links-green', the one literal colour (#2E6B3F under white text) defined in
-// assets/site-v2.css. `listed: false` keeps an app out of the home page while
-// /privacy still covers it: enquete is a placeholder page and trending is
-// discontinued, so neither is worth promoting right now.
+// assets/site-v2.css. `listed: false` keeps an app out of the home page and /privacy:
+// enquete is a placeholder page and trending is discontinued.
 export const apps = [
   { id: 'down', name: 'down.blue', description: 'app.down', url: 'https://down.blue', source: 'https://github.com/breakzplatform/downloader.notx.blue', ink: 'down', aliases: ['https://downloader.notx.blue'], links: [
     { label: 'shortcut', url: 'https://www.icloud.com/shortcuts/dd6be3060b4d4d4caf45f494feb40a95' },
