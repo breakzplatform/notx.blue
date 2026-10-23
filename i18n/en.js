@@ -7,6 +7,7 @@ export default {
   "intro": "notx.blue is the home of Joselito’s projects for Bluesky, made by",
   "apps": "The apps",
   "open": "Open project",
+  "alsoAt": "also at",
   "source": "Source code",
   "soon": "Coming soon",
   "archived": "Discontinued",

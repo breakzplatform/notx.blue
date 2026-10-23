@@ -135,3 +135,16 @@ test('used ink pairs meet 4.5:1 in light and dark', async () => {
     }
   }
 });
+
+test('app aliases are linked inside their cards in both languages', () => {
+  for (const language of Object.keys(dictionaries)) {
+    const html = renderPage('home', language);
+    for (const app of apps.filter(app => app.aliases)) {
+      const card = html.match(new RegExp('<article[^>]*id="' + app.id + '"[^>]*>([\\s\\S]*?)</article>'))[1];
+      for (const alias of app.aliases) {
+        assert.ok(card.includes(`href="${alias}" target="_blank" rel="noopener">${new URL(alias).host}</a>`));
+      }
+      assert.ok(card.includes(translate('alsoAt', language)));
+    }
+  }
+});

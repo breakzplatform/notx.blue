@@ -21,7 +21,7 @@ export function renderPage(page, language = 'pt-BR') {
     <div class="app-grid">${apps.map(app => `<article class="app-card cast ink-${app.ink}" id="${app.id}">
       <h3>${escape(app.name)}</h3>${app.status ? tagged('p', app.status, ' class="status"') : ''}
       ${tagged('p', app.description, ' class="description"')}
-      <div class="card-actions">${link(app.url, 'open', 'button primary press')}${app.source ? link(app.source, 'source') : ''}</div>
+      ${app.aliases ? `<p class="aliases"><small>${tagged('span', 'alsoAt')} ${app.aliases.map(url => `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(new URL(url).host)}</a>`).join(', ')}</small></p>\n      ` : ''}<div class="card-actions">${link(app.url, 'open', 'button primary press')}${app.source ? link(app.source, 'source') : ''}</div>
       ${app.links ? `<ul class="sublinks">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}
     </article>`).join('\n')}</div></section>
     <section class="secondary">${tagged('h2', 'secondary')}<ul>${secondary.map(entry => `<li>${item(entry)}</li>`).join('')}</ul></section>
