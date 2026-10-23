@@ -16,15 +16,15 @@ export const apps = [
   { id: 'links', name: 'links.notx.blue', description: 'app.links', url: 'https://links.notx.blue', ink: 'violet' },
   { id: 'handles', name: 'handles.notx.blue', description: 'app.handles', url: 'https://handles.notx.blue', source: 'https://github.com/breakzplatform/bsky-public-handles', ink: 'green' },
   { id: 'enquete', name: 'enquete.notx.blue', description: 'app.enquete', url: 'https://enquete.notx.blue', ink: 'yellow', status: 'soon' },
-  { id: 'trending', name: 'trending.notx.blue', description: 'app.trending', url: 'https://trending.notx.blue', source: 'https://github.com/breakzplatform/trending.notx.blue', ink: 'graphite', status: 'archived' },
+  { id: 'trending', name: 'trending.notx.blue', description: 'app.trending', url: 'https://github.com/breakzplatform/trending.notx.blue', openLabel: 'viewRepository', ink: 'graphite', status: 'archived' },
 ];
 
 export const secondary = [
-  { label: 'orkut', url: 'https://bsky.app/profile/etiquetasdoorkut.bsky.social', source: 'https://github.com/breakzplatform/orkut' },
-  { label: 'scorigami', url: 'https://bsky.app/profile/nflscorigami.bsky.social' },
-  { label: 'week', url: 'https://bsky.app/profile/semanaencerrada.bsky.social' },
-  { label: 'hours', url: 'https://bsky.app/profile/horariosoficiais.bsky.social' },
-  { label: 'bolsonaro', url: 'https://bsky.app/profile/obolsonaroestapreso.com' },
+  { group: 'labels', label: 'orkut', url: 'https://bsky.app/profile/etiquetasdoorkut.bsky.social', source: 'https://github.com/breakzplatform/orkut' },
+  { group: 'bots', label: 'scorigami', url: 'https://bsky.app/profile/nflscorigami.bsky.social' },
+  { group: 'bots', label: 'week', url: 'https://bsky.app/profile/semanaencerrada.bsky.social' },
+  { group: 'bots', label: 'hours', url: 'https://bsky.app/profile/horariosoficiais.bsky.social' },
+  { group: 'bots', label: 'bolsonaro', url: 'https://bsky.app/profile/obolsonaroestapreso.com' },
 ];
 export const handles = [
   { label: 'pessoas', url: 'https://pessoas.dev' },

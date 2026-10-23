@@ -164,3 +164,21 @@ test('pre-rendered theme buttons describe the current theme and action', () => {
     }
   }
 });
+
+test('labels and bots have separate headings and lists', () => {
+  for (const language of Object.keys(dictionaries)) {
+    const html = renderPage('home', language);
+    const labels = html.match(/<section class="secondary" aria-labelledby="labels-title">([\s\S]*?)<\/section>/)?.[1];
+    const bots = html.match(/<section class="secondary" aria-labelledby="bots-title">([\s\S]*?)<\/section>/)?.[1];
+    assert.ok(labels);
+    assert.ok(bots);
+    assert.ok(labels.includes(translate('labels', language)));
+    assert.ok(bots.includes(translate('bots', language)));
+    assert.equal([...labels.matchAll(/<li>/g)].length, 1);
+    assert.equal([...bots.matchAll(/<li>/g)].length, 4);
+    assert.ok(labels.includes(translate('orkut', language)));
+    for (const key of ['scorigami', 'week', 'hours', 'bolsonaro']) {
+      assert.ok(bots.includes(translate(key, language)));
+    }
+  }
+});
