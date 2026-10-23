@@ -95,7 +95,7 @@ test('every footer has contact, privacy and the three support chips in order', a
     assert.doesNotMatch(footer, /apoia\.se/);
     assert.match(footer, /class="db-meta mb-6 text-center"/);
     assert.match(footer, /data-i18n="fromBrazil"/);
-    assert.match(footer, /data-i18n="respect"/);
+    assert.doesNotMatch(footer, /data-i18n="respect"/);
   }
 });
 

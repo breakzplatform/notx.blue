@@ -23,7 +23,6 @@ export function renderPage(page, language = 'pt-BR') {
       ${tagged('span', 'support', ' class="db-micro mr-1 text-text-3"')}
       ${support.map(entry => link(entry.url, entry.label, `db-chip db-chip-${entry.className} cast press`)).join('\n      ')}
     </div>
-    ${tagged('p', 'respect', ' class="db-note text-center"')}
   </footer>`;
   const iconAttributes = 'width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"';
   const toggles = `<div class="flex flex-wrap items-center justify-end gap-2 pt-4">
@@ -52,9 +51,8 @@ export function renderPage(page, language = 'pt-BR') {
           <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.name"` : ''}>${escape(app.localized ? name('name') : app.name)}</h3>
           ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(aliasLink).join(', ')}</p>` : ''}
         </div>
-        <div class="nx-app-actions">${openButton}${app.source ? sourceButton(app.source, '') : ''}</div>${app.links ? `
-        <ul class="nx-app-extra">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}${app.extension ? `
-        <div class="nx-app-extension">${tagged('span', 'extension', ' class="db-micro text-text-3"')}${link(app.extension.chrome, 'chrome')}${link(app.extension.firefox, 'firefox')}${sourceLink(app.extension.source)}</div>` : ''}
+        <div class="nx-app-actions">${openButton}${app.source ? sourceButton(app.source, '') : ''}</div>${app.rows ? app.rows.map(row => `
+        <div class="nx-app-extension">${tagged('span', row.label, ' class="db-micro text-text-3"')}${row.links.map(([key, url]) => link(url, key)).join('')}${row.source ? sourceLink(row.source) : ''}</div>`).join('') : ''}
       </li>`;
     };
     const linkPanel = (id, titleKey, entries) => panel(id, titleKey, `<ul class="nx-links nx-link-list">${entries.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>`);

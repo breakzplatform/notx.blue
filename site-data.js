@@ -13,9 +13,10 @@ export const site = {
 // (app.<id>.name, .url, .aliasName, .aliasUrl); name/url/aliases then hold the pt-BR defaults.
 // enquete is a placeholder page and trending is discontinued.
 export const apps = [
-  { id: 'down', name: 'down.blue', description: 'app.down', url: 'https://down.blue', source: 'https://github.com/breakzplatform/downloader.notx.blue', ink: 'down', aliases: ['https://downloader.notx.blue'], extension: { chrome: 'https://down.blue/chrome', firefox: 'https://addons.mozilla.org/firefox/addon/down-blue/', source: 'https://github.com/breakzplatform/down.blue-extension' }, links: [
-    { label: 'shortcut', url: 'https://www.icloud.com/shortcuts/dd6be3060b4d4d4caf45f494feb40a95' },
-    { label: 'downBot', url: 'https://bsky.app/profile/down.blue', source: 'https://github.com/breakzplatform/down-blue-bot' },
+  { id: 'down', name: 'down.blue', description: 'app.down', url: 'https://down.blue', source: 'https://github.com/breakzplatform/down.blue', ink: 'down', aliases: ['https://downloader.notx.blue'], rows: [
+    { label: 'extension', links: [['chrome', 'https://down.blue/chrome'], ['firefox', 'https://addons.mozilla.org/firefox/addon/down-blue/']], source: 'https://github.com/breakzplatform/down.blue-extension' },
+    { label: 'blueskyBot', links: [['downBotHandle', 'https://bsky.app/profile/down.blue']], source: 'https://github.com/breakzplatform/down-blue-bot' },
+    { label: 'iosShortcut', links: [['shortcutAdd', 'https://www.icloud.com/shortcuts/dd6be3060b4d4d4caf45f494feb40a95']] },
   ] },
   { id: 'sorteio', name: 'sorteio.blue', description: 'app.sorteio', url: 'https://sorteio.blue', source: 'https://github.com/breakzplatform/skypicker.site', ink: 'magenta', localized: true, aliases: ['https://skypicker.site'] },
   { id: 'share', name: 'share.notx.blue', description: 'app.share', url: 'https://share.notx.blue', source: 'https://github.com/breakzplatform/share.notx.blue', ink: 'purple' },
