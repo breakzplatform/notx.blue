@@ -1,0 +1,34 @@
+/* Tailwind v4 entry point for notx.blue. Compiled by scripts/build-css.sh into
+   assets/tailwind-<version>.css — the only stylesheet index.html links.
+
+   scripts/ds/ is a verbatim copy of the joseli.to design system (skill
+   `joseli-to-ds`): never edit it here, replace the directory. The token files
+   are imported individually rather than through ds/styles.css so Tailwind's
+   bundler inlines them; base.css comes last because it has to win over
+   Tailwind's preflight. */
+/* source(none) turns off v4's automatic source detection. Without it Tailwind
+   scans the entry file's directory and treats the CSS itself as content: the
+   vendored tokens, and the previous build's output. It then extracts "classes"
+   from inside them, which made the output grow on every build. The @source
+   below is the only source of truth. */
+@import "tailwindcss" source(none);
+
+@import "./ds/tokens/fonts.css";
+@import "./ds/tokens/colors.css";
+@import "./ds/tokens/dark.css";
+@import "./ds/tokens/terminal.css";
+@import "./ds/tokens/typography.css";
+@import "./ds/tokens/spacing.css";
+@import "./ds/tokens/borders.css";
+@import "./ds/tokens/halftone.css";
+@import "./ds/tokens/base.css";
+@import "./ds/tokens/neo.css";
+
+@import "./tailwind-theme.css";
+
+@source "../index.html";
+
+:root, [data-theme] {
+  --project-ink: var(--ink-blue);
+  --project-ink-contrast: var(--on-blue);
+}
