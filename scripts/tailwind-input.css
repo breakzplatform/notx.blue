@@ -27,7 +27,13 @@
 @import "./tailwind-theme.css";
 
 @source "../index.html";
+@source "../privacy.html";
+@source "../404.html";
 
+/* notx.blue runs on the system's --ink-blue (#0000EE light, with white text
+   via --on-blue). Same trick as down.blue's teal: one rule on
+   `:root, [data-theme]` after the imports beats each theme block's default
+   project ink and resolves to that theme's own blue. */
 :root, [data-theme] {
   --project-ink: var(--ink-blue);
   --project-ink-contrast: var(--on-blue);

@@ -8,31 +8,56 @@ export function renderPage(page, language = 'pt-BR') {
   const text = key => escape(translate(key, language));
   const tagged = (tag, key, attributes = '') => `<${tag} data-i18n="${key}"${attributes}>${text(key)}</${tag}>`;
   const link = (url, key, classes = '') => `<a href="${escape(url)}"${url.startsWith('https:') ? ' target="_blank" rel="noopener"' : ''}${classes ? ` class="${classes}"` : ''} data-i18n="${key}">${text(key)}</a>`;
-  const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${link(entry.source, 'source', 'source-link')}` : ''}`;
-  const footer = `<footer>
-    <div class="footer-meta">${link(site.contact, 'contact')} ${link(site.privacy, 'privacy')} <span>${tagged('span', 'by')} ${link(site.author, 'author')}</span></div>
-    ${tagged('p', 'support')}
-    <div class="support">${support.map(entry => link(entry.url, entry.label, `db-chip db-chip-${entry.className} cast press`)).join('\n')}</div>
+  const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${link(entry.source, 'source', 'nx-source')}` : ''}`;
+  const panel = (id, titleKey, body, { first = false, wrapper = 'section', headingTag = 'h2', bodyClasses = 'p-4' } = {}) =>
+    `<${wrapper} class="db-panel cast ${first ? 'mt-15 ' : ''}mb-6" aria-labelledby="${id}"><${headingTag} class="db-panel-head" id="${id}">${tagged('span', titleKey)}</${headingTag}><div class="${bodyClasses}">${body}</div></${wrapper}>`;
+  const separator = ' · ';
+  const footer = `<footer class="pt-6">
+    <p class="db-meta mb-6 text-center">${tagged('span', 'tagline')}${separator}${tagged('span', 'by')} ${link(site.author, 'author')}${separator}${link(site.privacy, 'privacy')}${separator}${link(site.contact, 'contact')}</p>
+    ${tagged('p', 'fromBrazil', ' class="db-note mb-6 text-center"')}
+    <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
+      ${tagged('span', 'support', ' class="db-micro mr-1 text-text-3"')}
+      ${support.map(entry => link(entry.url, entry.label, `db-chip db-chip-${entry.className} cast press`)).join('\n      ')}
+    </div>
+    ${tagged('p', 'respect', ' class="db-note text-center"')}
   </footer>`;
+  const iconAttributes = 'width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"';
+  const toggles = `<div class="flex flex-wrap items-center justify-end gap-2 pt-4">
+      <button id="language-toggle" class="db-btn db-btn-sm cast press" type="button" data-i18n="language" lang="${language === 'en' ? 'pt-BR' : 'en'}" hidden>${text('language')}</button>
+      <button id="theme-toggle" class="db-btn db-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="${escape(translate('themeButton', language).replace('{current}', translate('theme.light', language)).replace('{next}', translate('theme.dark', language)))}" hidden>
+        <svg class="theme-icon-dark" ${iconAttributes}><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
+        <svg class="theme-icon-terminal" ${iconAttributes}><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
+        <svg class="theme-icon-light" ${iconAttributes}><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+        <span data-theme-name>${text('theme.dark')}</span>
+      </button>
+    </div>`;
+  const wordmark = page === 'home'
+    ? '<h1 class="db-wordmark">notx<span class="ink-block tilt-cw">.blue</span></h1>'
+    : '<div class="db-wordmark"><a href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a></div>';
   let content;
   if (page === 'home') {
-    content = `<section class="hero">${tagged('h1', 'hero')}<p class="intro">${tagged('span', 'intro')} ${link(site.author, 'author')}.</p></section>
-    <section aria-labelledby="apps-title">${tagged('h2', 'apps', ' id="apps-title" class="section-title"')}
-    <div class="app-grid">${apps.map(app => `<article class="app-card cast ink-${app.ink}" id="${app.id}">
-      <h3>${escape(app.name)}</h3>${app.status ? tagged('p', app.status, ' class="status"') : ''}
-      ${tagged('p', app.description, ' class="description"')}
-      ${app.aliases ? `<p class="aliases"><small>${tagged('span', 'alsoAt')} ${app.aliases.map(url => `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(new URL(url).host)}</a>`).join(', ')}</small></p>\n      ` : ''}<div class="card-actions">${link(app.url, app.openLabel || 'open', 'button primary press')}${app.source ? link(app.source, 'source') : ''}</div>
-      ${app.links ? `<ul class="sublinks">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}
-    </article>`).join('\n')}</div></section>
-    ${['labels', 'bots'].map(group => `<section class="secondary" aria-labelledby="${group}-title">${tagged('h2', group, ` id="${group}-title"`)}<ul>${secondary.filter(entry => entry.group === group).map(entry => `<li>${item(entry)}</li>`).join('')}</ul></section>`).join('\n    ')}
-    <section class="handle-list">${tagged('h2', 'handles')}<div>${handles.map(item).join(' ')}</div></section>`;
+    const appRow = app => `<li class="nx-app cast-flat nx-ink-${app.ink}" id="${app.id}">
+        <div>
+          <h3 class="nx-app-name">${escape(app.name)}</h3>
+          ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(url => `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(new URL(url).host)}</a>`).join(', ')}</p>` : ''}
+        </div>
+        <div class="nx-app-actions">${link(app.url, app.openLabel || 'open', 'db-btn db-btn-primary cast press')}${app.source ? link(app.source, 'source', 'nx-source') : ''}</div>${app.links ? `
+        <ul class="nx-app-extra">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}
+      </li>`;
+    const linkPanel = (id, titleKey, entries) => panel(id, titleKey, `<ul class="nx-links nx-link-list">${entries.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>`);
+    content = `${panel('projects-title', 'panelTitle', `<p class="mb-5">${tagged('span', 'lead')} ${link(site.author, 'author')}.</p>
+      <ul class="nx-apps">
+      ${apps.filter(app => app.listed !== false).map(appRow).join('\n      ')}
+      </ul>`, { first: true })}
+    ${['labels', 'bots'].map(group => linkPanel(`${group}-title`, group, secondary.filter(entry => entry.group === group))).join('\n    ')}
+    ${linkPanel('handles-title', 'handles', handles)}`;
   } else if (page === 'privacy') {
     const section = (id, heading, paragraphs, ending = '') => `<section id="${id}">${tagged('h2', heading)}${paragraphs.map(key => tagged('p', key)).join('')}${ending}</section>`;
-    content = `<article class="policy">${tagged('h1', 'privacy')}${tagged('p', 'updated', ' class="meta"')}${tagged('p', 'privacyIntro', ' class="intro"')}
-    ${apps.map(app => `<section id="privacy-${app.id}"><h2>${escape(app.name)}</h2>${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n')}
-    ${section('common', 'commonTitle', ['common'])}${section('retention', 'retentionTitle', ['retention'])}${section('rights', 'rightsTitle', ['rights'])}${section('changes', 'changesTitle', ['changes'], link(site.contact, 'contact'))}</article>`;
+    content = panel('privacy-title', 'privacy', `${tagged('p', 'updated', ' class="db-micro"')}${tagged('p', 'privacyIntro')}
+    ${apps.map(app => `<section id="privacy-${app.id}"><h2>${escape(app.name)}</h2>${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n    ')}
+    ${section('common', 'commonTitle', ['common'])}${section('retention', 'retentionTitle', ['retention'])}${section('rights', 'rightsTitle', ['rights'])}${section('changes', 'changesTitle', ['changes'], link(site.contact, 'contact'))}`, { first: true, wrapper: 'article', headingTag: 'h1', bodyClasses: 'nx-policy p-4' });
   } else {
-    content = `<section class="hero"><p class="meta">404</p>${tagged('h1', 'notFound')}${tagged('p', 'notFoundDescription', ' class="intro"')}${link(site.home, 'home', 'button primary cast press')}</section>`;
+    content = panel('not-found-title', 'notFound', `${tagged('p', 'notFoundDescription', ' class="mb-5"')}${link(site.home, 'home', 'db-btn db-btn-primary cast press')}`, { first: true, headingTag: 'h1' });
   }
   const title = page === 'home' ? 'homeTitle' : page === 'privacy' ? 'privacyTitle' : 'notFoundTitle';
   const description = page === 'home' ? 'homeDescription' : page === 'privacy' ? 'privacyDescription' : 'notFoundDescription';
@@ -61,19 +86,17 @@ export function renderPage(page, language = 'pt-BR') {
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script src="/theme-boot.js"></script>
   <link rel="stylesheet" href="/assets/tailwind-4.3.3.css">
-  <link rel="stylesheet" href="/assets/site-v1.css">
+  <link rel="stylesheet" href="/assets/site-v2.css">
   <script type="module" src="/main.js"></script>
 </head>
 <body>
   ${link('#main', 'skip', 'skip-link')}
-  <div class="shell">
-    <header><a class="wordmark" href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a>
-      <nav data-i18n-label="navigation" aria-label="${text('navigation')}">
-        <button id="language-toggle" class="button cast press" type="button" data-i18n="language" lang="en" hidden>${text('language')}</button>
-        <button id="theme-toggle" class="button cast press" type="button" aria-label="${text('themeButtonLabelLight')}" hidden>${text('dark')}</button>
-      </nav>
-    </header>
-    <main id="main" tabindex="-1">${content}</main>
+  <div class="mx-auto max-w-[880px] px-6 pb-16">
+    ${toggles}
+    <main id="main" tabindex="-1">
+      ${wordmark}
+      ${content}
+    </main>
     ${footer}
   </div>
 </body>

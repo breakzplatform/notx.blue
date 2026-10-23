@@ -2,7 +2,7 @@
 
 Joselito’s directory of Bluesky projects, with one central privacy page. Plain HTML, small JavaScript modules, Brazilian Portuguese and English. No runtime dependencies, cookies, analytics or third-party scripts.
 
-The app list, secondary links and support destinations live in [`site-data.js`](site-data.js). The renderer and tests read that same file. `links.notx.blue` has no source link because its repository is private.
+The app list, secondary links and the three support destinations (Pix, Buy Me a Coffee, GitHub Sponsors) live in [`site-data.js`](site-data.js). The renderer and tests read that same file. `links.notx.blue` has no source link because its repository is private.
 
 ## Local development
 
@@ -16,7 +16,7 @@ Open <http://127.0.0.1:8765>. This small development server supports `/privacy`,
 
 The committed HTML contains the complete Portuguese content. Crawlers and readers without JavaScript can read every page. JavaScript detects English browser preferences, otherwise defaults to Portuguese, and stores an explicit choice as `localStorage.lang`. It updates text, metadata and the document’s `lang` attribute. It does not replace the page’s structure.
 
-The theme follows `prefers-color-scheme` until the reader chooses light or dark. The choice is stored as `localStorage.theme`. `theme-boot.js` runs before the stylesheets, without inline JavaScript, to avoid a flash. Storage failures do not break either control. Unlike the current down.blue reference, this site has two themes and follows the system initially.
+There are three themes, as in down.blue: light, dark and terminal. One button cycles through them and names the next one. Until the reader picks one, the theme follows `prefers-color-scheme` in both directions (down.blue itself stays light; the design system has no media query, so `theme-boot.js` and `theme.js` set `data-theme` on `<html>`). A pick is stored as `localStorage.theme`. `theme-boot.js` runs before the stylesheets, without inline JavaScript, to avoid a flash. Storage failures do not break either control.
 
 ## Editing content
 
@@ -30,16 +30,16 @@ npm run check:links
 
 To add an app:
 
-1. Add its name, unique ID, URL, description key and distinct ink to `site-data.js`. Only add a source URL when the repository is public.
+1. Add its name, unique ID, URL, description key and distinct ink to `site-data.js`. Use a design-system ink name, and add a matching `.nx-ink-<name>` pair in `assets/site-v2.css`. Set `listed: false` to keep it off the home page while `/privacy` still covers it. Only add a source URL when the repository is public.
 2. Add its description and `privacy.<id>` paragraph to both dictionaries in `i18n/`. Verify its actual behavior before describing data handling. State what is unknown if the implementation is unavailable.
-3. Add the matching `.ink-<name>` pair in `assets/site-v1.css` if needed. Every background ink must use its `--on-*` text color.
+3. Every background ink must use its `--on-*` text color (at least 4.5:1; the tests check it).
 4. Regenerate HTML and run the tests and optional link check.
 
-`npm test` is offline and uses `node:test`, with no DOM library. It checks data, translations, rendering, links, support chips, privacy coverage, metadata, theme boot behavior, CSP and ink contrast. `npm run check:links` separately checks all external HTTPS destinations from the data file with HEAD and a GET fallback. Non-success responses and connection failures produce a nonzero exit status.
+`npm test` is offline and uses `node:test`, with no DOM library. It checks data, translations, rendering, links, the three support chips and their order, privacy coverage, metadata, theme boot behavior, CSP and ink contrast. `npm run check:links` separately checks all external HTTPS destinations from the data file with HEAD and a GET fallback. Non-success responses and connection failures produce a nonzero exit status.
 
 ## Styles and preview images
 
-The visual reference is down.blue: Computer Modern fonts, paper surfaces, ink blocks, halftone shadows and the same support-chip classes. notx.blue uses `--ink-blue` with `--on-blue`; down.blue’s card uses its own `--ink-down` pair.
+The visual reference is down.blue, and the layout is the same: a centered wordmark with an ink block, language and theme buttons at the top right, ink-headed panels, and a footer with the Brazil note, the Apoie/Support chips and the copyright line. The `.db-*` rules in `assets/site-v2.css` are copied verbatim from down.blue; only the `.nx-*` rules (app rows, per-project inks, policy text) are specific to this site. notx.blue uses `--ink-blue` with `--on-blue`; each listed app sets its own ink on its row: `--ink-down`, `--ink-magenta`, `--ink-purple`, `--ink-orange`, and the literal #2E6B3F with white text for links.notx.blue (the system has no green with white text).
 
 `scripts/ds/` contains the reference’s design-system snapshot. Replace the snapshot to update tokens; do not edit its generated color values. Fonts load from `https://static.joseli.to`, and no font binaries are shipped here.
 
@@ -47,7 +47,7 @@ The visual reference is down.blue: Computer Modern fonts, paper surfaces, ink bl
 npm run build:css
 ```
 
-This uses the pinned Tailwind 4.3.3 CLI in `scripts/`, installing its development dependencies with pnpm on the first run. The compiled CSS is committed in `assets/`; deployment does not install or run Tailwind. Site-specific layout rules live in `assets/site-v1.css`. Both CSS URLs are immutable: change their versioned filenames and the renderer references whenever their contents change after a deployment.
+This uses the pinned Tailwind 4.3.3 CLI in `scripts/`, installing its development dependencies with pnpm on the first run. The compiled CSS is committed in `assets/`; deployment does not install or run Tailwind. Site CSS lives in `assets/site-v2.css`. Both CSS URLs are immutable: change their versioned filenames and the renderer references whenever their contents change after a deployment.
 
 `scripts/og.html` is the intended 1200 × 630 preview. With Chrome installed:
 
@@ -82,8 +82,8 @@ The policy is dated 2026-10-23. It is based on these read-only local references:
 - **sorteio.blue / skypicker.site:** the `next15-oauth` branch, particularly `lib/oauth/session.ts`, `stores.ts`, `lib/atproto.ts`, `lib/raffle.ts`, `lib/snapshot.ts` and the OAuth, AT and snapshot routes. There was no policy to reuse: the description is derived from code. Production parity is unconfirmed. The encrypted cookie has a configured 30-day lifetime; login states expire after 10 minutes. Signed result URLs contain readable winner data and have no expiration in the reviewed format. Session failures can log DIDs and errors.
 - **share.notx.blue:** `docs/store/README.md`, `SUBMISSION.md`, the manifest and JavaScript in `crx/`. The reviewed version is 2.0.0; store documents say it has not been submitted. Older installed versions may differ. Settings use browser sync storage.
 - **handles.notx.blue:** the public directory responds, but no local implementation was found. Data storage, analytics, logs and retention remain unverified.
-- **enquete.notx.blue:** HTTP 200, but the entire response was “breve, siga @joseli.to e @joselito.dev.br”, without an HTML title or description. It is labeled coming soon; no voting or data practices are asserted.
-- **trending.notx.blue:** redirects to its public GitHub repository, which responds with 200 and marks the project discontinued because Bluesky now has trending topics. It remains listed with that status. Historical data practices are unverified.
+- **enquete.notx.blue:** HTTP 200, but the entire response was “breve, siga @joseli.to e @joselito.dev.br”, without an HTML title or description. It is hidden from the home page (`listed: false`) but kept here; no voting or data practices are asserted.
+- **trending.notx.blue:** redirects to its public GitHub repository, which responds with 200 and marks the project discontinued because Bluesky now has trending topics. It is hidden from the home page (`listed: false`) but kept here. Historical data practices are unverified.
 
 Netlify’s [logging documentation](https://docs.netlify.com/manage/monitoring/log-drains/) describes IP addresses in traffic logs; the active account’s retention configuration was not verified. Bluesky’s [account-management documentation](https://docs.bsky.app/blog/account-management) describes revoking connected OAuth apps. The policy does not claim that every linked app has no ads, sells no data, targets no children or shares one hosting provider: those blanket claims were not supported by the reviewed sources.
 
@@ -91,7 +91,7 @@ The secondary bots, labels, additional handle-domain services and their retentio
 
 ## Verification limits
 
-All 31 listed external HTTPS destinations responded successfully during implementation. Local HTTP checks cover `/`, `/privacy`, `/404.html`, the real 404 status for an unknown path, and referenced assets. Chrome headless exited before starting its debugging endpoint, so visual checks at 360px and 390px, keyboard interaction and real-browser persistence remain to be performed. The responsive layout and contrast checks are implemented, but automated HTML tests do not establish full browser accessibility.
+All 31 listed external HTTPS destinations responded successfully during implementation. Local HTTP checks cover `/`, `/privacy`, `/404.html`, the real 404 status for an unknown path, and referenced assets. Layout was checked in Chrome at 390px and 1280px, light and dark, against down.blue; keyboard interaction and real-browser persistence were not. The responsive layout and contrast checks are implemented, but automated HTML tests do not establish full browser accessibility.
 
 ## Project layout
 

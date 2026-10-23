@@ -33,17 +33,21 @@ test('HTML matches the renderer and all translation keys exist', async () => {
 
 test('real app data is complete, unique and rendered', async () => {
   const html = await read('index.html');
-  for (const property of ['name', 'id', 'url', 'ink']) {
+  const listed = apps.filter(app => app.listed !== false);
+  for (const property of ['name', 'id', 'url']) {
     assert.equal(new Set(apps.map(app => app[property])).size, apps.length);
   }
+  assert.equal(new Set(listed.map(app => app.ink)).size, listed.length);
+  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending']);
   for (const app of apps) {
     assert.ok(app.name);
     assert.equal(new URL(app.url).protocol, 'https:');
-    assert.ok(html.includes(`href="${escape(app.url)}"`));
+    assert.equal(html.includes(`href="${escape(app.url)}"`), app.listed !== false, app.id);
+    assert.equal(html.includes(`id="${app.id}"`), app.listed !== false, app.id);
     for (const language of Object.keys(dictionaries)) assert.ok(translate(app.description, language));
   }
+  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['handles', 'orange']]);
   assert.equal(apps.find(app => app.id === 'links').source, undefined);
-  assert.equal(apps.find(app => app.id === 'down').ink, 'down');
   for (const url of externalUrls()) {
     assert.equal(new URL(url).protocol, 'https:');
     assert.ok(!/\s/.test(url));
@@ -81,13 +85,17 @@ test('privacy covers each app in both languages and is published at /privacy', a
   assert.match(await read('sitemap.xml'), /<loc>https:\/\/notx.blue\/privacy<\/loc>/);
 });
 
-test('every footer has contact, privacy and four support chips', async () => {
+test('every footer has contact, privacy and the three support chips in order', async () => {
   for (const page of pages) {
-    const footer = (await read(page)).match(/<footer>([\s\S]*?)<\/footer>/)[1];
+    const footer = (await read(page)).match(/<footer class="pt-6">([\s\S]*?)<\/footer>/)[1];
     assert.match(footer, /mailto:abuse@notx.blue/);
     assert.match(footer, /href="\/privacy"/);
-    assert.equal([...footer.matchAll(/class="db-chip /g)].length, 4);
-    for (const entry of support) assert.ok(footer.includes(entry.url));
+    assert.deepEqual(support.map(entry => entry.label), ['pix', 'coffee', 'sponsors']);
+    assert.deepEqual([...footer.matchAll(/<a href="([^"]+)"[^>]*class="db-chip /g)].map(match => match[1]), support.map(entry => entry.url));
+    assert.doesNotMatch(footer, /apoia\.se/);
+    assert.match(footer, /class="db-meta mb-6 text-center"/);
+    assert.match(footer, /data-i18n="fromBrazil"/);
+    assert.match(footer, /data-i18n="respect"/);
   }
 });
 
@@ -96,19 +104,19 @@ test('language selection, safe text rendering and metadata updates', () => {
   assert.equal(detectLanguage(null, 'en-US'), 'en');
   assert.equal(detectLanguage('invalid', 'fr'), 'pt-BR');
   assert.equal(detectLanguage('toString', 'pt-BR'), 'pt-BR');
-  const text = { dataset: { i18n: 'hero' } };
+  const text = { dataset: { i18n: 'panelTitle' } };
   const meta = { dataset: { i18nContent: 'homeDescription' }, setAttribute(name, value) { this[name] = value; } };
   const document = { documentElement: {}, querySelectorAll(selector) { return selector === '[data-i18n]' ? [text] : selector === '[data-i18n-content]' ? [meta] : []; } };
   applyLanguage(document, 'en');
   assert.equal(document.documentElement.lang, 'en');
-  assert.equal(text.textContent, translate('hero', 'en'));
+  assert.equal(text.textContent, translate('panelTitle', 'en'));
   assert.equal(meta.content, translate('homeDescription', 'en'));
   assert.equal(escape('<script>"&'), '&lt;script&gt;&quot;&amp;');
 });
 
 test('theme boot follows the system, honors choices and tolerates blocked storage', async () => {
   const source = await read('theme-boot.js');
-  for (const [saved, dark, expected] of [[null, true, 'dark'], [null, false, 'light'], ['light', true, 'light'], ['dark', false, 'dark'], ['terminal', true, 'dark'], ['throws', true, 'dark']]) {
+  for (const [saved, dark, expected] of [[null, true, 'dark'], [null, false, 'light'], ['light', true, 'light'], ['dark', false, 'dark'], ['terminal', true, 'terminal'], ['terminal', false, 'terminal'], ['invalid', true, 'dark'], ['invalid', false, 'light'], ['throws', true, 'dark'], ['throws', false, 'light']]) {
     const document = { documentElement: { dataset: {} } };
     runInNewContext(source, { document, window: { matchMedia: () => ({ matches: dark }) }, localStorage: { getItem() { if (saved === 'throws') throw Error('Denied'); return saved; } } });
     assert.equal(document.documentElement.dataset.theme, expected);
@@ -122,17 +130,24 @@ test('CSP denies inline scripts and limits external resources', async () => {
   assert.doesNotMatch(await read('robots.txt'), /Disallow: \/\s/);
 });
 
-test('used ink pairs meet 4.5:1 in light and dark', async () => {
+test('used ink pairs meet 4.5:1 in every theme', async () => {
   const luminance = hex => {
     const channels = hex.match(/[a-f\d]{2}/gi).map(value => parseInt(value, 16) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4);
     return channels[0] * .2126 + channels[1] * .7152 + channels[2] * .0722;
   };
-  for (const file of ['colors', 'dark']) {
+  const contrast = (first, second) => {
+    const values = [luminance(first), luminance(second)].sort((a, b) => b - a);
+    return (values[0] + .05) / (values[1] + .05);
+  };
+  const css = await read('assets/site-v2.css');
+  const literal = css.match(/\.nx-ink-links-green \{ --project-ink: (#[a-f\d]{6}); --project-ink-contrast: (#[a-f\d]{6});/i);
+  assert.ok(contrast(literal[1], literal[2]) >= 4.5, 'links-green');
+  for (const file of ['colors', 'dark', 'terminal']) {
     const tokens = Object.fromEntries([...(await read(`scripts/ds/tokens/${file}.css`)).matchAll(/--([\w-]+):\s*(#[a-f\d]{6});/gi)].map(([, key, value]) => [key, value]));
-    for (const ink of new Set(['blue', 'pix', 'sponsors', ...apps.map(app => app.ink)])) {
-      const values = [luminance(tokens[`ink-${ink}`]), luminance(tokens[`on-${ink}`])].sort((a, b) => b - a);
-      assert.ok((values[0] + .05) / (values[1] + .05) >= 4.5, `${file}/${ink}`);
+    for (const ink of new Set(['blue', 'pix', 'sponsors', 'yellow', ...apps.filter(app => app.listed !== false && app.ink !== 'links-green').map(app => app.ink)])) {
+      assert.ok(contrast(tokens[`ink-${ink}`], tokens[`on-${ink}`]) >= 4.5, `${file}/${ink}`);
     }
+    if (file === 'terminal') assert.ok(contrast(tokens['ink-green'], tokens['on-green']) >= 4.5, 'terminal/green');
   }
 });
 
@@ -140,7 +155,7 @@ test('app aliases are linked inside their cards in both languages', () => {
   for (const language of Object.keys(dictionaries)) {
     const html = renderPage('home', language);
     for (const app of apps.filter(app => app.aliases)) {
-      const card = html.match(new RegExp('<article[^>]*id="' + app.id + '"[^>]*>([\\s\\S]*?)</article>'))[1];
+      const card = html.match(new RegExp('<li[^>]*id="' + app.id + '"[^>]*>([\\s\\S]*?)</li>\\s*(?:<li|</ul>)'))[1];
       for (const alias of app.aliases) {
         assert.ok(card.includes(`href="${alias}" target="_blank" rel="noopener">${new URL(alias).host}</a>`));
       }
@@ -156,29 +171,56 @@ test('privacy contact belongs to the changes section', () => {
   }
 });
 
-test('pre-rendered theme buttons describe the current theme and action', () => {
+test('pre-rendered theme buttons name the next theme, like down.blue', () => {
   for (const language of Object.keys(dictionaries)) {
     for (const page of ['home', 'privacy', '404']) {
-      const button = renderPage(page, language).match(/<button id="theme-toggle"[^>]*>/)[0];
-      assert.ok(button.includes(`aria-label="${translate('themeButtonLabelLight', language)}"`));
+      const html = renderPage(page, language);
+      const button = html.match(/<button id="theme-toggle"[\s\S]*?<\/button>/)[0];
+      const label = translate('themeButton', language).replace('{current}', translate('theme.light', language)).replace('{next}', translate('theme.dark', language));
+      assert.ok(button.includes(`aria-label="${label}"`));
+      assert.ok(button.includes('data-next-theme="dark"'));
+      assert.ok(button.includes(`<span data-theme-name>${translate('theme.dark', language)}</span>`));
+      assert.equal([...button.matchAll(/<svg /g)].length, 3);
+      assert.ok(html.includes('class="flex flex-wrap items-center justify-end gap-2 pt-4"'));
+      assert.ok(html.includes('class="mx-auto max-w-[880px] px-6 pb-16"'));
+      assert.doesNotMatch(html, /<header/);
     }
   }
 });
 
-test('labels and bots have separate headings and lists', () => {
+test('masthead: one h1, the wordmark on home and the panel title elsewhere', () => {
   for (const language of Object.keys(dictionaries)) {
-    const html = renderPage('home', language);
-    const labels = html.match(/<section class="secondary" aria-labelledby="labels-title">([\s\S]*?)<\/section>/)?.[1];
-    const bots = html.match(/<section class="secondary" aria-labelledby="bots-title">([\s\S]*?)<\/section>/)?.[1];
-    assert.ok(labels);
-    assert.ok(bots);
-    assert.ok(labels.includes(translate('labels', language)));
-    assert.ok(bots.includes(translate('bots', language)));
-    assert.equal([...labels.matchAll(/<li>/g)].length, 1);
-    assert.equal([...bots.matchAll(/<li>/g)].length, 4);
-    assert.ok(labels.includes(translate('orkut', language)));
-    for (const key of ['scorigami', 'week', 'hours', 'bolsonaro']) {
-      assert.ok(bots.includes(translate(key, language)));
+    for (const page of ['home', 'privacy', '404']) {
+      const html = renderPage(page, language);
+      assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
+      if (page === 'home') assert.match(html, /<h1 class="db-wordmark">notx<span class="ink-block tilt-cw">\.blue<\/span><\/h1>/);
+      else {
+        assert.match(html, /<div class="db-wordmark"><a href="\/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">\.blue<\/span><\/a><\/div>/);
+        assert.match(html, /<h1 class="db-panel-head"/);
+      }
     }
   }
+});
+
+test('home: one projects panel with the listed apps, then compact labels, bots and domains panels', () => {
+  for (const language of Object.keys(dictionaries)) {
+    const html = renderPage('home', language);
+    const panels = [...html.matchAll(/<section class="db-panel cast [^"]*" aria-labelledby="([^"]+)">/g)].map(match => match[1]);
+    assert.deepEqual(panels, ['projects-title', 'labels-title', 'bots-title', 'handles-title']);
+    assert.equal([...html.matchAll(/class="nx-app cast-flat nx-ink-/g)].length, 5);
+    assert.equal([...html.matchAll(/class="db-btn db-btn-primary cast press"/g)].length, 5);
+    assert.doesNotMatch(html, /enquete\.notx\.blue|trending\.notx\.blue/);
+    const labels = html.match(/id="labels-title">([\s\S]*?)<\/section>/)[1];
+    const bots = html.match(/id="bots-title">([\s\S]*?)<\/section>/)[1];
+    assert.ok(labels.includes(translate('labels', language)) && labels.includes(translate('orkut', language)));
+    assert.equal([...labels.matchAll(/<li>/g)].length, 1);
+    assert.equal([...bots.matchAll(/<li>/g)].length, 4);
+    assert.ok(bots.includes(translate('bots', language)));
+    for (const key of ['scorigami', 'week', 'hours', 'bolsonaro']) assert.ok(bots.includes(translate(key, language)));
+  }
+});
+
+test('privacy still covers apps hidden from the home page', () => {
+  const html = renderPage('privacy');
+  for (const id of ['enquete', 'trending']) assert.ok(html.includes(`id="privacy-${id}"`));
 });

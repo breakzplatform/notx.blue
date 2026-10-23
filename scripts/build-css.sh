@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Regenerate the vendored, compiled Tailwind CSS from scripts/tailwind-input.css
-# and the classes used in index.html. The site ships static CSS (no Play CDN
+# and the classes used in the generated pages. The site ships static CSS (no Play CDN
 # runtime), so this must be re-run whenever Tailwind classes change in
-# index.html or the design system in scripts/ds/ is replaced.
+# the pages or the design system in scripts/ds/ is replaced.
 #
 # Dependencies come from the repo's own pnpm lockfile, so a build is
 # reproducible down to the transitive packages. node_modules is gitignored and
@@ -51,8 +51,8 @@ mkdir -p "${WORK}"
 cp -R "${SCRIPT_DIR}/ds" "${WORK}/ds"
 cp "${SCRIPT_DIR}/tailwind-theme.css" "${WORK}/tailwind-theme.css"
 
-# The entry is compiled from .build/, so @source must become absolute.
-sed "s#@source \"../index.html\";#@source \"${ROOT_DIR}/index.html\";#" \
+# The entry is compiled from .build/, so every @source must become absolute.
+sed "s#@source \"\.\./#@source \"${ROOT_DIR}/#" \
   "${SCRIPT_DIR}/tailwind-input.css" > "${WORK}/input.css"
 
 mkdir -p "$(dirname "${OUTPUT}")"

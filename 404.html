@@ -22,26 +22,35 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script src="/theme-boot.js"></script>
   <link rel="stylesheet" href="/assets/tailwind-4.3.3.css">
-  <link rel="stylesheet" href="/assets/site-v1.css">
+  <link rel="stylesheet" href="/assets/site-v2.css">
   <script type="module" src="/main.js"></script>
 </head>
 <body>
   <a href="#main" class="skip-link" data-i18n="skip">Pular para o conteúdo</a>
-  <div class="shell">
-    <header><a class="wordmark" href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a>
-      <nav data-i18n-label="navigation" aria-label="Preferências">
-        <button id="language-toggle" class="button cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
-        <button id="theme-toggle" class="button cast press" type="button" aria-label="Tema atual: claro. Mudar para tema escuro." hidden>Tema escuro</button>
-      </nav>
-    </header>
-    <main id="main" tabindex="-1"><section class="hero"><p class="meta">404</p><h1 data-i18n="notFound">Esta página não está aqui.</h1><p data-i18n="notFoundDescription" class="intro">O endereço pode ter mudado. Os projetos estão na página inicial.</p><a href="/" class="button primary cast press" data-i18n="home">Voltar ao início</a></section></main>
-    <footer>
-    <div class="footer-meta"><a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a> <a href="/privacy" data-i18n="privacy">Privacidade</a> <span><span data-i18n="by">por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a></span></div>
-    <p data-i18n="support">Se for do seu interesse, considere apoiar os projetos.</p>
-    <div class="support"><a href="https://pix.joseli.to" target="_blank" rel="noopener" class="db-chip db-chip-pix cast press" data-i18n="pix">Pix</a>
-<a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="db-chip db-chip-coffee cast press" data-i18n="coffee">Buy Me a Coffee</a>
-<a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-sponsors cast press" data-i18n="sponsors">GitHub Sponsors</a>
-<a href="https://apoia.se/joselito" target="_blank" rel="noopener" class="db-chip db-chip-apoiase cast press" data-i18n="apoiase">APOIA.se</a></div>
+  <div class="mx-auto max-w-[880px] px-6 pb-16">
+    <div class="flex flex-wrap items-center justify-end gap-2 pt-4">
+      <button id="language-toggle" class="db-btn db-btn-sm cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
+      <button id="theme-toggle" class="db-btn db-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="Tema: claro, toque para escuro" hidden>
+        <svg class="theme-icon-dark" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
+        <svg class="theme-icon-terminal" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
+        <svg class="theme-icon-light" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+        <span data-theme-name>escuro</span>
+      </button>
+    </div>
+    <main id="main" tabindex="-1">
+      <div class="db-wordmark"><a href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a></div>
+      <section class="db-panel cast mt-15 mb-6" aria-labelledby="not-found-title"><h1 class="db-panel-head" id="not-found-title"><span data-i18n="notFound">Esta página não está aqui.</span></h1><div class="p-4"><p data-i18n="notFoundDescription" class="mb-5">O endereço pode ter mudado. Os projetos estão na página inicial.</p><a href="/" class="db-btn db-btn-primary cast press" data-i18n="home">Voltar ao início</a></div></section>
+    </main>
+    <footer class="pt-6">
+    <p class="db-meta mb-6 text-center"><span data-i18n="tagline">Projetos para o Bluesky</span> · <span data-i18n="by">feito por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a> · <a href="/privacy" data-i18n="privacy">Privacidade</a> · <a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></p>
+    <p data-i18n="fromBrazil" class="db-note mb-6 text-center">Direto do Brasil pelo Joselito, com muito carinho. Este site não usa cookies nem coleta dados. Este site não tem relação com o Bluesky.</p>
+    <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
+      <span data-i18n="support" class="db-micro mr-1 text-text-3">Apoie</span>
+      <a href="https://pix.joseli.to" target="_blank" rel="noopener" class="db-chip db-chip-pix cast press" data-i18n="pix">Pix</a>
+      <a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="db-chip db-chip-coffee cast press" data-i18n="coffee">Buy Me a Coffee</a>
+      <a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-sponsors cast press" data-i18n="sponsors">GitHub Sponsors</a>
+    </div>
+    <p data-i18n="respect" class="db-note text-center">Respeite direitos autorais e os termos de uso do Bluesky.</p>
   </footer>
   </div>
 </body>

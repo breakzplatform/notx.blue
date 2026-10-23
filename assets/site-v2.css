@@ -1,69 +1,126 @@
-:root, [data-theme] { --project-ink: var(--ink-blue); --project-ink-contrast: var(--on-blue); }
-* { box-sizing: border-box; }
-body { margin: 0; font: var(--type-body); background: var(--surface-page); color: var(--text-1); }
-[hidden] { display: none !important; }
-a { text-underline-offset: 3px; overflow-wrap: anywhere; }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 5px; }
-.shell { max-width: 1080px; margin: auto; padding: 24px 24px 64px; }
-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 24px; border-bottom: var(--border); }
-.wordmark, .wordmark:visited { font: 700 36px/1.1 var(--font-display); color: var(--text-1); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
-.ink-block { display: inline-block; padding: 2px 5px 5px; line-height: .92; background: var(--project-ink); color: var(--project-ink-contrast); }
-nav, .support, .card-actions, .footer-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
-.button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 14px; border: var(--border); font: var(--type-label); background: var(--surface-card); color: var(--text-1); text-decoration: none; cursor: pointer; }
-.button:visited { color: var(--text-1); }
-.button.primary, .button.primary:visited { background: var(--ink, var(--project-ink)); color: var(--on-ink, var(--project-ink-contrast)); }
-.hero { padding: 60px 0 48px; }
-h1 { font: 700 clamp(36px, 7vw, 64px)/1.07 var(--font-display); letter-spacing: var(--tracking-display); max-width: 800px; margin: 0 0 24px; }
-h2 { font: 700 28px/1.2 var(--font-display); margin: 0 0 20px; }
-.intro { font: var(--type-reading); max-width: 720px; }
-.intro a { display: inline-block; min-height: 44px; }
-.section-title, .meta, .status { font: var(--type-label); letter-spacing: var(--tracking-meta); text-transform: uppercase; }
-.app-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
-.app-card { border: var(--border); border-top: 10px solid var(--ink); padding: 24px; background: var(--surface-card); display: flex; flex-direction: column; min-width: 0; }
-.app-card h3 { font: 700 clamp(24px, 4vw, 30px)/1.2 var(--font-display); overflow-wrap: anywhere; margin: 0 0 16px; }
-.description { margin: 0 0 24px; color: var(--text-2); }
-.card-actions { margin-top: auto; }
-.card-actions a, .sublinks a, .secondary a, .handle-list a, .footer-meta a, .policy > a { display: inline-flex; align-items: center; min-height: 44px; }
-.sublinks { margin: 20px 0 0; border-top: 1px solid var(--border-hairline); padding-top: 12px; list-style: none; }
-.sublinks li { display: flex; flex-wrap: wrap; gap: 0 12px; }
-.source-link { font-size: 14px; }
-.status { margin: 0 0 12px; color: var(--text-2); }
-.ink-down { --ink: var(--ink-down); --on-ink: var(--on-down); }
-.ink-orange { --ink: var(--ink-orange); --on-ink: var(--on-orange); }
-.ink-magenta { --ink: var(--ink-magenta); --on-ink: var(--on-magenta); }
-.ink-violet { --ink: var(--ink-violet); --on-ink: var(--on-violet); }
-.ink-green { --ink: var(--ink-green); --on-ink: var(--on-green); }
-.ink-yellow { --ink: var(--ink-yellow); --on-ink: var(--on-yellow); }
-.ink-graphite { --ink: var(--ink-graphite); --on-ink: var(--on-graphite); }
-.secondary { margin-top: 64px; border-top: var(--border); padding-top: 28px; }
-.secondary ul { list-style: none; padding: 0; columns: 2; column-gap: 32px; }
-.secondary li { break-inside: avoid; }
-.secondary .source-link { margin-left: 12px; }
-.handle-list { margin: 28px 0 48px; }
-.handle-list a { margin-right: 24px; }
-footer { border-top: var(--border); padding-top: 24px; margin-top: 48px; }
-footer p { margin: 16px 0; color: var(--text-2); }
-.footer-meta { justify-content: space-between; }
-.db-chip { display: inline-flex; align-items: center; padding: 5px 9px; min-height: 44px; font: var(--type-label); text-transform: uppercase; letter-spacing: var(--tracking-meta); text-decoration: none; }
+/* notx.blue components. The .db-* rules below are copied verbatim from
+   down.blue's index.html (lines 33-81 and 191-200, minus the APOIA.se chip and
+   the rules for parts this site does not have) so the two sites stay one
+   family: keep them identical rather than tuning them here. The nx-* rules
+   after them are the only site-specific CSS. */
+
+/* The wordmark: the name in CMU Serif bold, the suffix an ink block tilted
+   +1.5deg like a sticker (.ink-block.tilt-cw). It runs past the top of the
+   type scale on purpose: this is a one-page tool and the masthead is the
+   only display type it has. */
+.db-wordmark {
+  margin: var(--space-10) 0 var(--space-6);
+  font: var(--weight-display) clamp(var(--text-display-1), 13vw, 116px)/1.1 var(--font-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--text-1);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Meta lines, tags and labels: typewriter, uppercase, tracked out. */
+.db-meta { font: var(--type-meta); text-transform: uppercase; letter-spacing: var(--tracking-meta); color: var(--text-3); }
+.db-micro { font: var(--type-label); text-transform: uppercase; letter-spacing: var(--tracking-meta); }
+/* Running machine output and fine print: typewriter, but readable. */
+.db-note { font: var(--type-code); color: var(--text-3); }
+
+/* Every box title — panel head, callout spine — is the same object: an ink
+   block in typewriter caps. The panel itself carries .cast. */
+.db-panel { background: var(--surface-card); }
+.db-panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  margin: 0; padding: var(--box-head-pad); border-bottom: var(--border);
+  background: var(--project-ink); color: var(--project-ink-contrast);
+  font: var(--weight-bold) var(--text-caption)/1.3 var(--font-mono);
+  letter-spacing: var(--tracking-meta); text-transform: uppercase;
+}
+
+/* Buttons carry only their type and colour; .cast.press in the markup does
+   the halftone shadow, the lift on hover and the slam on press. */
+.db-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3);
+  background: var(--surface-page); color: var(--text-1);
+  font: var(--weight-bold) var(--text-body-sm)/1.25 var(--font-body);
+  padding: 8px 12px; cursor: pointer; text-align: center; text-decoration: none;
+}
+a.db-btn, a.db-btn:visited, a.db-btn:hover { color: var(--text-1); background: var(--surface-page); text-decoration: none; }
+.db-btn-primary, a.db-btn-primary, a.db-btn-primary:visited, a.db-btn-primary:hover {
+  background: var(--project-ink); border-color: var(--project-ink); color: var(--project-ink-contrast);
+}
+.db-btn-danger { background: var(--ink-red); border-color: var(--ink-red); color: var(--on-red); }
+/* Disabled: no travel, no shadow (.press handles both), a sunken fill and
+   the second text colour. Never an opacity fade. */
+.db-btn:disabled, .db-btn-primary:disabled, .db-btn-danger:disabled {
+  background: var(--surface-sunken); border-color: var(--border-strong); color: var(--text-2); cursor: not-allowed;
+}
+.db-btn-sm { padding: 4px 7px; font-size: var(--text-meta); }
+
+/* Support links: each takes a system ink with its on-* partner, so they
+   stay legible in all three themes. */
+.db-chip {
+  display: inline-flex; align-items: center; padding: 5px 9px;
+  font: var(--type-label); text-transform: uppercase; letter-spacing: var(--tracking-meta); text-decoration: none;
+}
 a.db-chip-pix, a.db-chip-pix:visited, a.db-chip-pix:hover { background: var(--ink-pix); color: var(--on-pix); }
-a.db-chip-apoiase, a.db-chip-apoiase:visited, a.db-chip-apoiase:hover { background: var(--ink-orange); color: var(--on-orange); }
 a.db-chip-coffee, a.db-chip-coffee:visited, a.db-chip-coffee:hover { background: var(--ink-yellow); color: var(--on-yellow); }
 a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { background: var(--ink-sponsors); color: var(--on-sponsors); }
-.policy { max-width: 760px; margin: 48px auto; }
-.policy section { margin-top: 36px; }
-.policy p { font: var(--type-reading); margin-bottom: 20px; overflow-wrap: anywhere; }
-.policy .meta { font: var(--type-label); }
-.skip-link { position: absolute; left: 16px; top: -100px; padding: 12px; z-index: 10; background: var(--surface-card); }
+
+/* ---- notx.blue only ---- */
+
+[hidden] { display: none !important; }
+
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 10; padding: 12px; background: var(--surface-card); color: var(--text-1); }
 .skip-link:focus { top: 8px; }
-@media (max-width: 640px) {
-  .shell { padding: 20px 20px 48px; }
-  header { gap: 16px; }
-  nav { margin-left: auto; }
-  .hero { padding: 40px 0 32px; }
-  .app-grid { grid-template-columns: minmax(0, 1fr); }
-  .app-card { padding: 20px; }
-  .secondary ul { columns: 1; }
+
+/* Wordmark on pages where the h1 is the panel title: same type, but a link home. */
+.db-wordmark a, .db-wordmark a:visited, .db-wordmark a:hover { color: inherit; text-decoration: none; }
+
+/* One ink per project. Every pair sets --project-ink and its on-ink partner so
+   .db-btn-primary and .db-panel-head inside the row pick it up. The design
+   system has no green with white text, so links.notx.blue uses a literal
+   #2E6B3F (white text, 6.5:1); terminal swaps it for the system's mono ink. */
+.nx-ink-down { --project-ink: var(--ink-down); --project-ink-contrast: var(--on-down); }
+.nx-ink-magenta { --project-ink: var(--ink-magenta); --project-ink-contrast: var(--on-magenta); }
+.nx-ink-purple { --project-ink: var(--ink-purple); --project-ink-contrast: var(--on-purple); }
+.nx-ink-orange { --project-ink: var(--ink-orange); --project-ink-contrast: var(--on-orange); }
+.nx-ink-links-green { --project-ink: #2E6B3F; --project-ink-contrast: #FFFFFF; }
+:root[data-theme="terminal"] .nx-ink-links-green { --project-ink: var(--ink-green); --project-ink-contrast: var(--on-green); }
+
+/* App rows sit inside a casting panel, so they rest flat (.cast-flat). */
+.nx-apps, .nx-links { margin: 0; padding: 0; list-style: none; }
+.nx-apps { display: grid; gap: var(--space-4); }
+.nx-app {
+  display: grid; gap: var(--space-4); padding: var(--space-5);
+  border-left: var(--space-3) solid var(--project-ink); background: var(--surface-page);
 }
+.nx-app-name { margin: 0 0 var(--space-1); font: var(--weight-bold) var(--text-body)/1.25 var(--font-display); overflow-wrap: anywhere; }
+.nx-app-text { margin: 0; color: var(--text-2); font: var(--text-body-sm)/1.4 var(--font-body); }
+.nx-app-aside { margin: var(--space-2) 0 0; color: var(--text-3); font: var(--type-meta); }
+.nx-app-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-6); }
+.nx-app-extra { margin: var(--space-3) 0 0; padding: 0; list-style: none; display: grid; gap: var(--space-1); font: var(--text-body-sm)/1.4 var(--font-body); }
+.nx-link-list { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
+.nx-link-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); }
+.nx-source { font-size: var(--text-meta); }
+@media (min-width: 640px) {
+  .nx-app { grid-template-columns: 1fr max-content; align-items: start; }
+  .nx-app-actions { justify-content: flex-end; }
+}
+
+/* Policy copy inside its panel. */
+.nx-policy h2 { margin: var(--space-6) 0 var(--space-2); font: var(--weight-bold) var(--text-body)/1.3 var(--font-display); }
+.nx-policy h2:first-child { margin-top: 0; }
+.nx-policy p { margin: 0 0 var(--space-4); overflow-wrap: anywhere; }
+
+/* Small buttons and chips match down.blue on a pointer; on touch they grow to
+   the 44px target. */
+@media (pointer: coarse) {
+  .db-btn, .db-chip { min-height: 44px; }
+}
+
+.theme-switch svg { display: none; flex: none; }
+.theme-switch[data-next-theme="dark"] .theme-icon-dark,
+.theme-switch[data-next-theme="terminal"] .theme-icon-terminal,
+.theme-switch[data-next-theme="light"] .theme-icon-light { display: block; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
