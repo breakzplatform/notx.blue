@@ -70,7 +70,7 @@ export function renderPage(page, language = 'pt-BR') {
     <header><a class="wordmark" href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a>
       <nav data-i18n-label="navigation" aria-label="${text('navigation')}">
         <button id="language-toggle" class="button cast press" type="button" data-i18n="language" lang="en" hidden>${text('language')}</button>
-        <button id="theme-toggle" class="button cast press" type="button" hidden>${text('dark')}</button>
+        <button id="theme-toggle" class="button cast press" type="button" aria-label="${text('themeButtonLabelLight')}" hidden>${text('dark')}</button>
       </nav>
     </header>
     <main id="main" tabindex="-1">${content}</main>

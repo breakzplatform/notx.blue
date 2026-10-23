@@ -40,6 +40,8 @@ export default {
   "skip": "Pular para o conteúdo",
   "navigation": "Preferências",
   "language": "english",
+  "themeButtonLabelLight": "Tema atual: claro. Mudar para tema escuro.",
+  "themeButtonLabelDark": "Tema atual: escuro. Mudar para tema claro.",
   "light": "Tema claro",
   "dark": "Tema escuro",
   "privacyTitle": "Privacidade — notx.blue",

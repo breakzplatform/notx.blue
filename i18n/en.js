@@ -40,6 +40,8 @@ export default {
   "skip": "Skip to content",
   "navigation": "Preferences",
   "language": "português",
+  "themeButtonLabelLight": "Current theme: light. Switch to dark theme.",
+  "themeButtonLabelDark": "Current theme: dark. Switch to light theme.",
   "light": "Light theme",
   "dark": "Dark theme",
   "privacyTitle": "Privacy — notx.blue",

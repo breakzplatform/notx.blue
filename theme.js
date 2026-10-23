@@ -5,6 +5,7 @@ export function bindTheme(button, label) {
   function update() {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     button.textContent = label(next);
+    button.setAttribute('aria-label', label(next === 'light' ? 'themeButtonLabelDark' : 'themeButtonLabelLight'));
   }
   button.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';

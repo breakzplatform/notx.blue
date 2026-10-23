@@ -155,3 +155,12 @@ test('privacy contact belongs to the changes section', () => {
     assert.match(section, /:<\/p><a href="mailto:abuse@notx.blue"/);
   }
 });
+
+test('pre-rendered theme buttons describe the current theme and action', () => {
+  for (const language of Object.keys(dictionaries)) {
+    for (const page of ['home', 'privacy', '404']) {
+      const button = renderPage(page, language).match(/<button id="theme-toggle"[^>]*>/)[0];
+      assert.ok(button.includes(`aria-label="${translate('themeButtonLabelLight', language)}"`));
+    }
+  }
+});
