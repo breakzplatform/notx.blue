@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="privacyTitle">Privacidade — notx.blue</title>
+  <meta name="description" data-i18n-content="privacyDescription" content="Como os projetos notx.blue tratam dados, sessões e armazenamento.">
+  
+  <link rel="canonical" href="https://notx.blue/privacy">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="notx.blue">
+  <meta property="og:title" data-i18n-content="privacyTitle" content="Privacidade — notx.blue">
+  <meta property="og:description" data-i18n-content="privacyDescription" content="Como os projetos notx.blue tratam dados, sessões e armazenamento.">
+  <meta property="og:url" content="https://notx.blue/privacy">
+  <meta property="og:image" content="https://notx.blue/share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-content="privacyTitle" content="Privacidade — notx.blue">
+  <meta name="twitter:description" data-i18n-content="privacyDescription" content="Como os projetos notx.blue tratam dados, sessões e armazenamento.">
+  <meta name="twitter:image" content="https://notx.blue/share.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="/theme-boot.js"></script>
+  <link rel="stylesheet" href="/assets/tailwind-4.3.3.css">
+  <link rel="stylesheet" href="/assets/site-v1.css">
+  <script type="module" src="/main.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link" data-i18n="skip">Pular para o conteúdo</a>
+  <div class="shell">
+    <header><a class="wordmark" href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a>
+      <nav data-i18n-label="navigation" aria-label="Preferências">
+        <button id="language-toggle" class="button cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
+        <button id="theme-toggle" class="button cast press" type="button" hidden>Tema escuro</button>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1"><article class="policy"><h1 data-i18n="privacy">Privacidade</h1><p data-i18n="updated" class="meta">Última atualização: 2026-10-23.</p><p data-i18n="privacyIntro" class="intro">Este site guarda apenas suas preferências de idioma e tema no navegador. Os apps têm práticas diferentes: há downloads locais, edição de perfil via OAuth e sorteios com processamento no servidor. Esta política reúne o que foi verificado e identifica os serviços sem cobertura detalhada.</p>
+    <section id="privacy-down"><h2>down.blue</h2><p data-i18n="privacy.down">O site consulta APIs públicas do Bluesky, servidores PDS, plc.directory e provedores de vídeo/GIF, incluindo Tenor e Giphy. Downloads e conversões rodam no navegador, sem login nem servidor próprio de conversão. Links curtos podem consultar da.gd. O histórico de downloads e as preferências ficam no localStorage; você pode apagar o histórico no app ou limpar os dados do site. Não há analytics no código revisado. A extensão down.blue abre o endereço do post no site a pedido do usuário e guarda configurações locais, sem sincronização. A operação do bot e do atalho iOS não foi auditada nesta revisão.</p></section>
+<section id="privacy-sorteio"><h2>sorteio.blue</h2><p data-i18n="privacy.sorteio">Esta descrição vem da branch next15-oauth de skypicker.site; não foi confirmada a versão em produção. O login usa OAuth. Estado, DID e sessões com tokens ficam em um cookie criptografado e HttpOnly, limitado ao host, SameSite=Lax e Secure em HTTPS. O servidor lê esse cookie para acessar Bluesky/PDS e buscar posts, curtidas, reposts e perfis. O cookie tem duração configurada de 30 dias; estados de login expiram em 10 minutos. Sair destrói o cookie e tenta revogar a sessão. Não foi encontrado banco de dados nem analytics. Falhas de restauração de sessão podem registrar DID e mensagem de erro nos logs.</p><p data-i18n="privacy.sorteioResults">O sorteio ocorre no navegador. Ao criar um link de resultado, o servidor recebe e assina dados do post, título, contagens e DIDs, handles e nomes dos vencedores. Esses dados ficam no próprio URL, comprimidos e assinados, não criptografados. Quem receber o link pode lê-los e compartilhá-los; não há prazo de expiração no formato revisado. Logs de acesso e cópias de terceiros podem reter esse endereço. A preferência de tema fica no localStorage.</p></section>
+<section id="privacy-share"><h2>share.notx.blue</h2><p data-i18n="privacy.share">Na versão 2.0.0 revisada, a extensão redireciona intenções de compartilhamento de Twitter/X dentro do navegador. Ao clicar na barra ou no menu de contexto, título, URL, link ou texto selecionado são usados para abrir o compositor escolhido. Esse destino recebe o texto; a extensão não publica automaticamente. Cliente, instância e URL de composição ficam em storage.sync, sujeito à sincronização do navegador. As permissões incluem activeTab, contextMenus, storage e redirecionamento dos endereços de compartilhamento de X/Twitter. Não lê o conteúdo das páginas nem usa servidor intermediário ou analytics. Os documentos da loja dizem que essa versão ainda não foi submetida; versões instaladas anteriores podem ter outro fluxo.</p></section>
+<section id="privacy-links"><h2>links.notx.blue</h2><p data-i18n="privacy.links">A página, o recorte e a codificação do ícone rodam neste navegador. Não há uma conta neste site. O login usa OAuth; os tokens ficam no IndexedDB deste navegador, guardados pela biblioteca OAuth. Não há banco de dados próprio para handle, token, perfil ou ícone. O ícone salvo vira um blob público no seu repositório Bluesky. O app consulta Bluesky/PDS, fontes de imagens e o serviço de favicons cardyb.bsky.app. Preferências de tema e idioma ficam no navegador.</p><p data-i18n="privacy.linksProxy">Um proxy de imagem sem estado busca imagens quando o navegador não consegue baixá-las diretamente. O código não grava logs nem armazena imagens e responde com no-store. Isso não elimina registros da infraestrutura: a Netlify aplica limite por IP e domínio antes da função. O servidor de origem da imagem também recebe a requisição.</p></section>
+<section id="privacy-handles"><h2>handles.notx.blue</h2><p data-i18n="privacy.handles">O endereço apresenta um diretório público de domínios para handles. O código e os serviços por trás do diretório não foram auditados nesta revisão. Não há confirmação aqui sobre armazenamento, logs, analytics ou retenção desse app; os provedores de cada domínio têm suas próprias práticas.</p></section>
+<section id="privacy-enquete"><h2>enquete.notx.blue</h2><p data-i18n="privacy.enquete">Em 2026-10-23 o endereço respondeu apenas “breve, siga @joseli.to e @joselito.dev.br”. Não foi encontrado código local nem um fluxo de votação verificável. Contas, votos, armazenamento, logs e retenção de um futuro serviço de enquetes não estão cobertos em detalhe.</p></section>
+<section id="privacy-trending"><h2>trending.notx.blue</h2><p data-i18n="privacy.trending">Em 2026-10-23 o endereço redirecionou para o repositório no GitHub, que declara o projeto descontinuado porque o Bluesky incorporou assuntos em alta. Ao seguir o link, você acessa o GitHub e suas práticas se aplicam. O antigo processamento de tópicos e sua retenção não foram auditados.</p></section>
+    <section id="common"><h2 data-i18n="commonTitle">O que é comum e o que depende do app</h2><p data-i18n="common">Este portal notx.blue não usa cookies, analytics, anúncios ou scripts de terceiros, nem coleta dados para venda. É hospedado na Netlify e carrega fontes de static.joseli.to. Esses servidores recebem dados de conexão, como IP e endereço solicitado, e podem manter registros operacionais; não foi verificado seu prazo de retenção. Bluesky, PDS, destinos de compartilhamento, sites de apoio e demais links externos têm práticas próprias. Não se estende a todos os apps uma promessa de ausência de coleta, anúncios ou venda sem auditoria. Bots, etiquetas e os domínios adicionais de handles não foram cobertos em detalhe.</p></section><section id="retention"><h2 data-i18n="retentionTitle">Retenção e controle</h2><p data-i18n="retention">As preferências deste portal ficam no localStorage até você limpar os dados do site. Nos apps, use a opção de sair e, para impedir novos acessos OAuth, revogue o acesso nas configurações de aplicativos conectados do Bluesky ou do seu provedor. Limpar o navegador não remove ícones, registros públicos, links de resultados ou cópias feitas por terceiros. Use o app ou seu PDS para alterar os registros do perfil. Não foi confirmado um prazo único para logs de hospedagem ou dados dos serviços não auditados.</p></section><section id="rights"><h2 data-i18n="rightsTitle">Pedidos sobre seus dados</h2><p data-i18n="rights">Para perguntar sobre seus dados ou solicitar acesso, correção ou remoção, escreva para o contato abaixo e identifique o app e os dados envolvidos. Não envie senhas ou tokens. A resposta depende dos dados sob nosso controle; conteúdo em Bluesky/PDS, cookies no seu dispositivo e cópias de terceiros podem exigir ações nesses serviços ou no navegador.</p></section><section id="changes"><h2 data-i18n="changesTitle">Mudanças e contato</h2><p data-i18n="changes">Atualizações desta política serão publicadas em /privacy com uma nova data. Dúvidas, pedidos e denúncias:</p></section><a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></article></main>
+    <footer>
+    <div class="footer-meta"><a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a> <a href="/privacy" data-i18n="privacy">Privacidade</a> <span><span data-i18n="by">por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a></span></div>
+    <p data-i18n="support">Se for do seu interesse, considere apoiar os projetos.</p>
+    <div class="support"><a href="https://pix.joseli.to" target="_blank" rel="noopener" class="db-chip db-chip-pix cast press" data-i18n="pix">Pix</a>
+<a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="db-chip db-chip-coffee cast press" data-i18n="coffee">Buy Me a Coffee</a>
+<a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-sponsors cast press" data-i18n="sponsors">GitHub Sponsors</a>
+<a href="https://apoia.se/joselito" target="_blank" rel="noopener" class="db-chip db-chip-apoiase cast press" data-i18n="apoiase">APOIA.se</a></div>
+  </footer>
+  </div>
+</body>
+</html>
