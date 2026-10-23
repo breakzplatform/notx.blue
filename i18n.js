@@ -16,6 +16,9 @@ export function applyLanguage(document, language) {
   for (const element of document.querySelectorAll('[data-i18n]')) {
     element.textContent = translate(element.dataset.i18n, language);
   }
+  for (const element of document.querySelectorAll('[data-i18n-href]')) {
+    element.setAttribute('href', translate(element.dataset.i18nHref, language));
+  }
   for (const element of document.querySelectorAll('[data-i18n-content]')) {
     element.setAttribute('content', translate(element.dataset.i18nContent, language));
   }

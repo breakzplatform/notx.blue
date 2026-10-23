@@ -47,7 +47,7 @@ test('real app data is complete, unique and rendered', async () => {
     for (const language of Object.keys(dictionaries)) assert.ok(translate(app.description, language));
   }
   assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['handles', 'orange']]);
-  assert.equal(apps.find(app => app.id === 'links').source, undefined);
+  assert.equal(apps.find(app => app.id === 'links').source, 'https://github.com/breakzplatform/links.notx.blue');
   for (const url of externalUrls()) {
     assert.equal(new URL(url).protocol, 'https:');
     assert.ok(!/\s/.test(url));
@@ -56,7 +56,7 @@ test('real app data is complete, unique and rendered', async () => {
 
 test('local links and referenced files exist; external links belong to the data file', async () => {
   for (const page of pages) {
-    for (const [, value] of (await read(page)).matchAll(/(?:href|src)="([^"]+)"/g)) {
+    for (const [, value] of (await read(page)).matchAll(/(?<![-\w])(?:href|src)="([^"]+)"/g)) {
       if (value.startsWith('#') || value.startsWith('mailto:')) continue;
       if (value.startsWith('https:')) {
         assert.ok(externalUrls().includes(value) || value.startsWith('https://notx.blue/'));
@@ -156,8 +156,10 @@ test('app aliases are linked inside their cards in both languages', () => {
     const html = renderPage('home', language);
     for (const app of apps.filter(app => app.aliases)) {
       const card = html.match(new RegExp('<li[^>]*id="' + app.id + '"[^>]*>([\\s\\S]*?)</li>\\s*(?:<li|</ul>)'))[1];
-      for (const alias of app.aliases) {
-        assert.ok(card.includes(`href="${alias}" target="_blank" rel="noopener">${new URL(alias).host}</a>`));
+      const aliases = app.localized ? [translate(`app.${app.id}.aliasUrl`, language)] : app.aliases;
+      for (const alias of aliases) {
+        assert.ok(card.includes(`href="${alias}" target="_blank" rel="noopener"`));
+        assert.ok(card.includes(`>${new URL(alias).host}</a>`));
       }
       assert.ok(card.includes(translate('alsoAt', language)));
     }
@@ -223,4 +225,23 @@ test('home: one projects panel with the listed apps, then compact labels, bots a
 test('privacy leaves out apps hidden from the home page', () => {
   const html = renderPage('privacy');
   for (const id of ['enquete', 'trending']) assert.ok(!html.includes(`id="privacy-${id}"`));
+});
+
+test('the giveaway app is named per language on the home page and /privacy', () => {
+  const expected = { 'pt-BR': ['sorteio.blue', 'skypicker.site'], en: ['skypicker.site', 'sorteio.blue'] };
+  for (const [language, [name, alias]] of Object.entries(expected)) {
+    const home = renderPage('home', language).match(/<li class="nx-app[^"]*" id="sorteio">([\s\S]*?)<\/li>/)[1];
+    assert.match(home, new RegExp(`<h3 class="nx-app-name"[^>]*>${name.replace('.', '\\.')}</h3>`));
+    assert.match(home, new RegExp(`href="https://${name.replace('.', '\\.')}"[^>]*class="db-btn db-btn-primary`));
+    assert.match(home, new RegExp(`data-i18n="alsoAt">[^<]*</span> <a href="https://${alias.replace('.', '\\.')}"`));
+    assert.match(renderPage('privacy', language), new RegExp(`<h2 data-i18n="app.sorteio.name">${name.replace('.', '\\.')}</h2>`));
+  }
+  assert.ok(!translate('privacyIntro', 'en').includes('sorteio.blue'));
+});
+
+test('every source link renders as the neutral button', () => {
+  const home = renderPage('home');
+  const sources = apps.filter(app => app.listed !== false && app.source).length + 3;
+  assert.equal(home.match(/<span data-i18n="source"/g).length, sources);
+  assert.ok(home.includes('href="https://github.com/breakzplatform/links.notx.blue"'));
 });

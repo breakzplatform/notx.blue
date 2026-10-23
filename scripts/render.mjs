@@ -8,7 +8,10 @@ export function renderPage(page, language = 'pt-BR') {
   const text = key => escape(translate(key, language));
   const tagged = (tag, key, attributes = '') => `<${tag} data-i18n="${key}"${attributes}>${text(key)}</${tag}>`;
   const link = (url, key, classes = '') => `<a href="${escape(url)}"${url.startsWith('https:') ? ' target="_blank" rel="noopener"' : ''}${classes ? ` class="${classes}"` : ''} data-i18n="${key}">${text(key)}</a>`;
-  const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${link(entry.source, 'source', 'nx-source')}` : ''}`;
+  const codeIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg>';
+  const neutralButton = (url, key, classes, icon = '') => `<a href="${escape(url)}" target="_blank" rel="noopener" class="db-btn nx-source ${classes} cast press">${icon}<span data-i18n="${key}">${text(key)}</span></a>`;
+  const sourceButton = (url, classes) => neutralButton(url, 'source', classes, codeIcon);
+  const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${sourceButton(entry.source, 'db-btn-sm')}` : ''}`;
   const panel = (id, titleKey, body, { first = false, wrapper = 'section', headingTag = 'h2', bodyClasses = 'p-4' } = {}) =>
     `<${wrapper} class="db-panel cast ${first ? 'mt-15 ' : ''}mb-6" aria-labelledby="${id}"><${headingTag} class="db-panel-head" id="${id}">${tagged('span', titleKey)}</${headingTag}><div class="${bodyClasses}">${body}</div></${wrapper}>`;
   const separator = ' · ';
@@ -36,14 +39,23 @@ export function renderPage(page, language = 'pt-BR') {
     : '<div class="db-wordmark"><a href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a></div>';
   let content;
   if (page === 'home') {
-    const appRow = app => `<li class="nx-app cast-flat nx-ink-${app.ink}" id="${app.id}">
+    const appRow = app => {
+      const name = key => app.localized ? translate(`app.${app.id}.${key}`, language) : null;
+      const localizedLink = (key, urlKey, classes = '') => `<a href="${escape(name(urlKey))}" target="_blank" rel="noopener"${classes ? ` class="${classes}"` : ''} data-i18n="app.${app.id}.${key}" data-i18n-href="app.${app.id}.${urlKey}">${escape(name(key))}</a>`;
+      const aliasLink = url => app.localized ? localizedLink('aliasName', 'aliasUrl') : `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(new URL(url).host)}</a>`;
+      const openButton = app.localized
+        ? `<a href="${escape(name('url'))}" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="${app.openLabel || 'open'}" data-i18n-href="app.${app.id}.url">${text(app.openLabel || 'open')}</a>`
+        : link(app.url, app.openLabel || 'open', 'db-btn db-btn-primary cast press');
+      return `<li class="nx-app cast-flat nx-ink-${app.ink}" id="${app.id}">
         <div>
-          <h3 class="nx-app-name">${escape(app.name)}</h3>
-          ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(url => `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(new URL(url).host)}</a>`).join(', ')}</p>` : ''}
+          <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.name"` : ''}>${escape(app.localized ? name('name') : app.name)}</h3>
+          ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(aliasLink).join(', ')}</p>` : ''}
         </div>
-        <div class="nx-app-actions">${link(app.url, app.openLabel || 'open', 'db-btn db-btn-primary cast press')}${app.source ? link(app.source, 'source', 'nx-source') : ''}</div>${app.links ? `
-        <ul class="nx-app-extra">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}
+        <div class="nx-app-actions">${openButton}${app.source ? sourceButton(app.source, '') : ''}</div>${app.links ? `
+        <ul class="nx-app-extra">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}${app.extension ? `
+        <div class="nx-app-extension">${tagged('span', 'extension', ' class="db-micro text-text-3"')}${neutralButton(app.extension.chrome, 'chrome', 'db-btn-sm')}${neutralButton(app.extension.firefox, 'firefox', 'db-btn-sm')}${sourceButton(app.extension.source, 'db-btn-sm')}</div>` : ''}
       </li>`;
+    };
     const linkPanel = (id, titleKey, entries) => panel(id, titleKey, `<ul class="nx-links nx-link-list">${entries.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>`);
     content = `${panel('projects-title', 'panelTitle', `<p class="mb-5">${tagged('span', 'lead')} ${link(site.author, 'author')}.</p>
       <ul class="nx-apps">
@@ -54,7 +66,7 @@ export function renderPage(page, language = 'pt-BR') {
   } else if (page === 'privacy') {
     const section = (id, heading, paragraphs, ending = '') => `<section id="${id}">${tagged('h2', heading)}${paragraphs.map(key => tagged('p', key)).join('')}${ending}</section>`;
     content = panel('privacy-title', 'privacy', `${tagged('p', 'updated', ' class="db-micro"')}${tagged('p', 'privacyIntro')}
-    ${apps.filter(app => app.listed !== false).map(app => `<section id="privacy-${app.id}"><h2>${escape(app.name)}</h2>${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n    ')}
+    ${apps.filter(app => app.listed !== false).map(app => `<section id="privacy-${app.id}">${app.localized ? tagged('h2', `app.${app.id}.name`) : `<h2>${escape(app.name)}</h2>`}${tagged('p', `privacy.${app.id}`)}${app.id === 'links' ? tagged('p', 'privacy.linksProxy') : ''}${app.id === 'sorteio' ? tagged('p', 'privacy.sorteioResults') : ''}</section>`).join('\n    ')}
     ${section('common', 'commonTitle', ['common'])}${section('retention', 'retentionTitle', ['retention'])}${section('rights', 'rightsTitle', ['rights'])}${section('changes', 'changesTitle', ['changes'], link(site.contact, 'contact'))}`, { first: true, wrapper: 'article', headingTag: 'h1', bodyClasses: 'nx-policy p-4' });
   } else {
     content = panel('not-found-title', 'notFound', `${tagged('p', 'notFoundDescription', ' class="mb-5"')}${link(site.home, 'home', 'db-btn db-btn-primary cast press')}`, { first: true, headingTag: 'h1' });

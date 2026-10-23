@@ -2,7 +2,7 @@
 
 Joselito’s directory of Bluesky projects, with one central privacy page. Plain HTML, small JavaScript modules, Brazilian Portuguese and English. No runtime dependencies, cookies, analytics or third-party scripts.
 
-The app list, secondary links and the three support destinations (Pix, Buy Me a Coffee, GitHub Sponsors) live in [`site-data.js`](site-data.js). The renderer and tests read that same file. `links.notx.blue` has no source link because its repository is private.
+The app list, secondary links and the three support destinations (Pix, Buy Me a Coffee, GitHub Sponsors) live in [`site-data.js`](site-data.js). The renderer and tests read that same file.
 
 ## Local development
 
