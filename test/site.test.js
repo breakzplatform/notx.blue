@@ -239,9 +239,10 @@ test('the giveaway app is named per language on the home page and /privacy', () 
   assert.ok(!translate('privacyIntro', 'en').includes('sorteio.blue'));
 });
 
-test('every source link renders as the neutral button', () => {
+test('app sources render as neutral buttons and inline sources as links', () => {
   const home = renderPage('home');
-  const sources = apps.filter(app => app.listed !== false && app.source).length + 3;
+  const sources = apps.filter(app => app.listed !== false && app.source).length;
   assert.equal(home.match(/<span data-i18n="source"/g).length, sources);
+  assert.equal(home.match(/class="nx-source-link" data-i18n="source"/g).length, 3);
   assert.ok(home.includes('href="https://github.com/breakzplatform/links.notx.blue"'));
 });

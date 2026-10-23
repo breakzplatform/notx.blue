@@ -11,7 +11,8 @@ export function renderPage(page, language = 'pt-BR') {
   const codeIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg>';
   const neutralButton = (url, key, classes, icon = '') => `<a href="${escape(url)}" target="_blank" rel="noopener" class="db-btn nx-source ${classes} cast press">${icon}<span data-i18n="${key}">${text(key)}</span></a>`;
   const sourceButton = (url, classes) => neutralButton(url, 'source', classes, codeIcon);
-  const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${sourceButton(entry.source, 'db-btn-sm')}` : ''}`;
+  const sourceLink = url => link(url, 'source', 'nx-source-link');
+  const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${sourceLink(entry.source)}` : ''}`;
   const panel = (id, titleKey, body, { first = false, wrapper = 'section', headingTag = 'h2', bodyClasses = 'p-4' } = {}) =>
     `<${wrapper} class="db-panel cast ${first ? 'mt-15 ' : ''}mb-6" aria-labelledby="${id}"><${headingTag} class="db-panel-head" id="${id}">${tagged('span', titleKey)}</${headingTag}><div class="${bodyClasses}">${body}</div></${wrapper}>`;
   const separator = ' · ';
@@ -53,7 +54,7 @@ export function renderPage(page, language = 'pt-BR') {
         </div>
         <div class="nx-app-actions">${openButton}${app.source ? sourceButton(app.source, '') : ''}</div>${app.links ? `
         <ul class="nx-app-extra">${app.links.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>` : ''}${app.extension ? `
-        <div class="nx-app-extension">${tagged('span', 'extension', ' class="db-micro text-text-3"')}${neutralButton(app.extension.chrome, 'chrome', 'db-btn-sm')}${neutralButton(app.extension.firefox, 'firefox', 'db-btn-sm')}${sourceButton(app.extension.source, 'db-btn-sm')}</div>` : ''}
+        <div class="nx-app-extension">${tagged('span', 'extension', ' class="db-micro text-text-3"')}${link(app.extension.chrome, 'chrome')}${link(app.extension.firefox, 'firefox')}${sourceLink(app.extension.source)}</div>` : ''}
       </li>`;
     };
     const linkPanel = (id, titleKey, entries) => panel(id, titleKey, `<ul class="nx-links nx-link-list">${entries.map(entry => `<li>${item(entry)}</li>`).join('')}</ul>`);
