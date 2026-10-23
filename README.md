@@ -16,7 +16,7 @@ Open <http://127.0.0.1:8765>. This small development server supports `/privacy`,
 
 The committed HTML contains the complete Portuguese content. Crawlers and readers without JavaScript can read every page. JavaScript detects English browser preferences, otherwise defaults to Portuguese, and stores an explicit choice as `localStorage.lang`. It updates text, metadata and the document’s `lang` attribute. It does not replace the page’s structure.
 
-There are three themes, as in down.blue: light, dark and terminal. One button cycles through them and names the next one. Until the reader picks one, the theme follows `prefers-color-scheme` in both directions (down.blue itself stays light; the design system has no media query, so `theme-boot.js` and `theme.js` set `data-theme` on `<html>`). A pick is stored as `localStorage.theme`. `theme-boot.js` runs before the stylesheets, without inline JavaScript, to avoid a flash. Storage failures do not break either control.
+There are three themes, as in down.blue: light, dark and terminal. One button cycles through them and names the next one. Like down.blue, it starts light until the reader picks another one; `theme-boot.js` and `theme.js` set `data-theme` on `<html>`. A pick is stored as `localStorage.theme`. `theme-boot.js` runs before the stylesheets, without inline JavaScript, to avoid a flash. Storage failures do not break either control.
 
 ## Editing content
 

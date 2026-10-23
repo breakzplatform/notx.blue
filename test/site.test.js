@@ -114,9 +114,9 @@ test('language selection, safe text rendering and metadata updates', () => {
   assert.equal(escape('<script>"&'), '&lt;script&gt;&quot;&amp;');
 });
 
-test('theme boot follows the system, honors choices and tolerates blocked storage', async () => {
+test('theme boot starts light, honors choices and tolerates blocked storage', async () => {
   const source = await read('theme-boot.js');
-  for (const [saved, dark, expected] of [[null, true, 'dark'], [null, false, 'light'], ['light', true, 'light'], ['dark', false, 'dark'], ['terminal', true, 'terminal'], ['terminal', false, 'terminal'], ['invalid', true, 'dark'], ['invalid', false, 'light'], ['throws', true, 'dark'], ['throws', false, 'light']]) {
+  for (const [saved, dark, expected] of [[null, true, 'light'], [null, false, 'light'], ['light', true, 'light'], ['dark', false, 'dark'], ['terminal', true, 'terminal'], ['terminal', false, 'terminal'], ['invalid', true, 'light'], ['invalid', false, 'light'], ['throws', true, 'light'], ['throws', false, 'light']]) {
     const document = { documentElement: { dataset: {} } };
     runInNewContext(source, { document, window: { matchMedia: () => ({ matches: dark }) }, localStorage: { getItem() { if (saved === 'throws') throw Error('Denied'); return saved; } } });
     assert.equal(document.documentElement.dataset.theme, expected);

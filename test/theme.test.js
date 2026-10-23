@@ -4,7 +4,7 @@ import { translate } from '../i18n.js';
 import { bindTheme } from '../theme.js';
 
 for (const blocked of [false, true]) {
-  test(`theme button cycles light, dark, terminal and stops following the system (blocked=${blocked})`, () => {
+  test(`theme button cycles light, dark, terminal and ignores the system preference (blocked=${blocked})`, () => {
     const previous = Object.fromEntries(['window', 'document', 'localStorage'].map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
     let systemChange;
     let click;
@@ -27,12 +27,7 @@ for (const blocked of [false, true]) {
       assert.equal(button.dataset.nextTheme, 'dark');
       assert.equal(button['aria-label'], 'Theme: light, tap for dark');
 
-      systemChange({ matches: true });
-      assert.equal(theme(), 'dark');
-      assert.equal(name.textContent, 'terminal');
-      assert.equal(button['aria-label'], 'Theme: dark, tap for terminal');
-      systemChange({ matches: false });
-      assert.equal(theme(), 'light');
+      assert.equal(systemChange, undefined);
 
       language = 'pt-BR';
       update();
@@ -50,10 +45,6 @@ for (const blocked of [false, true]) {
       click();
       assert.equal(theme(), 'light');
       assert.equal(values.get('theme'), blocked ? undefined : 'light');
-
-      systemChange({ matches: true });
-      assert.equal(theme(), 'light');
-      assert.equal(button['aria-label'], 'Tema: claro, toque para escuro');
     } finally {
       for (const [key, descriptor] of Object.entries(previous)) {
         if (descriptor) Object.defineProperty(globalThis, key, descriptor);

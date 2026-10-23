@@ -124,3 +124,7 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+.nx-policy p + p { margin-top: 0.875rem; }
+.nx-policy section { margin-top: 1.75rem; }
+.nx-policy h2 { margin-bottom: 0.5rem; }
