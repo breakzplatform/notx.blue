@@ -100,7 +100,7 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 .nx-link-list { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
 .nx-link-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); }
 .nx-app-actions { align-items: stretch; }
-.nx-app-extension { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+.nx-app-extension { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3); font: var(--text-body-sm)/1.4 var(--font-body); }
 /* Neutral secondary button: .db-btn paper fill and ink border, mono label, so it
    never competes with the app's ink on "Open project". */
 .nx-source { font-family: var(--font-mono); font-weight: var(--weight-bold); font-size: var(--text-meta); gap: var(--space-2); }
