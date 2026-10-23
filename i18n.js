@@ -3,7 +3,7 @@ import english from './i18n/en.js';
 
 export const dictionaries = { 'pt-BR': portuguese, en: english };
 export function detectLanguage(saved, browserLanguage = '') {
-  if (saved in dictionaries) return saved;
+  if (Object.hasOwn(dictionaries, saved)) return saved;
   return browserLanguage.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
 }
 export function translate(key, language = 'pt-BR') {
