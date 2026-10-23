@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, writeFile, readFile, readdir, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 
 test('deployment prune removes development files and keeps published pages', async () => {
-  await mkdir('.browser', { recursive: true });
-  const directory = await mkdtemp(resolve('.browser/prune-'));
+  const directory = await mkdtemp(resolve(tmpdir(), 'notx-prune-'));
   try {
     for (const name of ['LICENSE', 'index.html', 'privacy.html', '404.html', 'theme-boot.js', 'README.md', 'package.json', 'netlify.toml', '.run-prompt.txt']) await writeFile(resolve(directory, name), 'fixture');
     for (const name of ['scripts', 'test', 'assets', 'i18n', '.netlify', '.git']) await mkdir(resolve(directory, name));

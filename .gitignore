@@ -3,6 +3,5 @@ dist/
 .netlify/
 .DS_Store
 scripts/.build/
-.browser/
 
 .pnpm-store/
