@@ -1,7 +1,7 @@
 export default {
   "brand": "notx.blue",
   "author": "@joseli.to",
-  "homeTitle": "Projetos para o Bluesky — notx.blue",
+  "homeTitle": "Projetos para o Bluesky • notx.blue",
   "homeDescription": "Vídeos, sorteios, links e outros projetos do Joselito para o Bluesky.",
   "panelTitle": "Projetos para o Bluesky",
   "lead": "notx.blue é a casa dos projetos do Joselito para o Bluesky, por",
@@ -54,7 +54,7 @@ export default {
   "by": "feito por",
   "skip": "Pular para o conteúdo",
   "language": "english",
-  "privacyTitle": "Privacidade — notx.blue",
+  "privacyTitle": "Privacidade • notx.blue",
   "privacyDescription": "Como os projetos notx.blue tratam dados, sessões e armazenamento.",
   "updated": "Última atualização: 23 de outubro de 2026.",
   "privacyIntro": "Eu crio estes apps e mantenho este site. O site guarda apenas suas preferências de idioma e tema no navegador. Os apps são diferentes: o down.blue funciona localmente no navegador, o sorteio.blue e o links.notx.blue fazem login com OAuth do Bluesky, e a extensão do share roda inteira no navegador. Esta página diz o que cada um faz com os dados.",
@@ -73,7 +73,7 @@ export default {
   "rights": "Para perguntar sobre seus dados ou pedir acesso, correção ou remoção, escreva para o contato abaixo e indique o app e os dados envolvidos. Não envie senhas nem tokens. Posso agir sobre os dados que controlo. Conteúdo no Bluesky ou no seu PDS, cookies no seu dispositivo e cópias de terceiros podem exigir ação nesses serviços ou no navegador.",
   "changesTitle": "Mudanças e contato",
   "changes": "Mudanças nesta política são publicadas em /privacy, com nova data. Dúvidas, pedidos e denúncias:",
-  "notFoundTitle": "Página não encontrada — notx.blue",
+  "notFoundTitle": "Página não encontrada • notx.blue",
   "notFound": "Esta página não está aqui.",
   "notFoundDescription": "O endereço pode ter mudado. Os projetos estão na página inicial.",
   "home": "Voltar ao início"

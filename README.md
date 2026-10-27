@@ -37,6 +37,10 @@ To add an app:
 
 `npm test` runs offline with `node:test`. `npm run check:links` checks every external link in the data file.
 
+## Page titles
+
+Every page's `<title>`, `og:title` and `twitter:title` read `<page description> • <domain>` (U+2022 with one space on each side), with the description in the page's language: `Projetos para o Bluesky • notx.blue`.
+
 ## Styles and the social image
 
 The visual reference is down.blue: centered wordmark with an ink block, language and theme buttons at the top right, ink-headed panels, and the same footer. The `.db-*` rules in `assets/site-v2.css` come from down.blue; the `.nx-*` rules are specific to this site. notx.blue uses the blue ink; each app row uses that app's own ink.

@@ -1,7 +1,7 @@
 export default {
   "brand": "notx.blue",
   "author": "@joseli.to",
-  "homeTitle": "Projects for Bluesky — notx.blue",
+  "homeTitle": "Projects for Bluesky • notx.blue",
   "homeDescription": "Videos, giveaways, links and other Bluesky projects by Joselito.",
   "panelTitle": "Projects for Bluesky",
   "lead": "notx.blue is the home of Joselito’s projects for Bluesky, made by",
@@ -54,7 +54,7 @@ export default {
   "by": "made by",
   "skip": "Skip to content",
   "language": "português",
-  "privacyTitle": "Privacy — notx.blue",
+  "privacyTitle": "Privacy • notx.blue",
   "privacyDescription": "How notx.blue projects handle data, sessions and storage.",
   "updated": "Last updated: October 23, 2026.",
   "privacyIntro": "I build these apps and run this site. The site stores only your language and theme preferences in your browser. The apps differ: down.blue works locally in your browser, skypicker.site and links.notx.blue sign you in with Bluesky OAuth, and the share extension runs entirely in your browser. This page says what each one does with data.",
@@ -73,7 +73,7 @@ export default {
   "rights": "To ask about your data or request access, correction or removal, write to the contact below and name the app and the data involved. Do not send passwords or tokens. I can act on the data I control. Content on Bluesky or your PDS, cookies on your device and copies held by others may need action in those services or in your browser.",
   "changesTitle": "Changes and contact",
   "changes": "Changes to this policy are published at /privacy with a new date. Questions, requests and abuse reports:",
-  "notFoundTitle": "Page not found — notx.blue",
+  "notFoundTitle": "Page not found • notx.blue",
   "notFound": "This page is not here.",
   "notFoundDescription": "The address may have changed. Find the projects on the home page.",
   "home": "Back to home"
