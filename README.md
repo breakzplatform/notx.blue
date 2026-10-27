@@ -58,7 +58,7 @@ The first rebuilds the committed Tailwind CSS with the pinned CLI in `scripts/`.
 
 The site is on Netlify, which serves `privacy.html` at `/privacy`. `netlify.toml` sets the CSP, the security headers and immutable caching for `assets/`.
 
-The build command prunes the working directory down to the published files, so deploy from a throwaway export, never from your checkout:
+The build command prunes the working directory down to the published files. `prune.mjs` refuses to run outside a Netlify build unless given `--force`; deploy from a throwaway export, never from your checkout:
 
 ```sh
 dir=$(mktemp -d)
@@ -66,7 +66,7 @@ git archive HEAD | tar -x -C "$dir"
 cd "$dir"
 node scripts/render.mjs --check
 grep -v '^  command' netlify.toml > ../netlify.toml.tmp
-node scripts/prune.mjs
+node scripts/prune.mjs --force
 mv ../netlify.toml.tmp netlify.toml
 npx netlify-cli deploy --dir . --site 388f9139-62ce-49ed-aa82-6a33a4085256  # peppy-lamington-52fcd7 (lookup by name fails)
 ```

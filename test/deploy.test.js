@@ -10,7 +10,9 @@ test('deployment prune removes development files and keeps published pages', asy
   try {
     for (const name of ['LICENSE', 'index.html', 'privacy.html', '404.html', 'theme-boot.js', 'README.md', 'package.json', 'netlify.toml', '.run-prompt.txt']) await writeFile(resolve(directory, name), 'fixture');
     for (const name of ['scripts', 'test', 'assets', 'i18n', '.netlify', '.git']) await mkdir(resolve(directory, name));
-    execFileSync(process.execPath, [resolve('scripts/prune.mjs')], { cwd: directory });
+    assert.throws(() => execFileSync(process.execPath, [resolve('scripts/prune.mjs')], { cwd: directory, env: { ...process.env, NETLIFY: '' }, stdio: 'pipe' }));
+    assert.ok((await readdir(directory)).includes('README.md'));
+    execFileSync(process.execPath, [resolve('scripts/prune.mjs'), '--force'], { cwd: directory });
     assert.deepEqual((await readdir(directory)).sort(), ['LICENSE', '.git', '.netlify', '404.html', 'assets', 'i18n', 'index.html', 'privacy.html', 'theme-boot.js'].sort());
   } finally {
     await rm(directory, { recursive: true, force: true });
