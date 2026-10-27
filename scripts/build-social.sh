@@ -38,8 +38,9 @@ EOF
 # Captures to a temporary file so a failed run never replaces a published image.
 # The virtual time budget lets the web fonts finish loading before the capture.
 render() {
-  local page="$1" width="$2" height="$3" output="$4" capture size
-  capture="$(mktemp -t social).png"
+  local page="$1" width="$2" height="$3" output="$4" directory capture size
+  directory="$(mktemp -d "${TMPDIR:-/tmp}/social.XXXXXX")"
+  capture="$directory/capture.png"
   "$CHROME" --headless=new --disable-gpu --hide-scrollbars \
     --force-device-scale-factor=1 --force-color-profile=srgb --window-size="$width,$height" \
     --virtual-time-budget=5000 \
@@ -47,6 +48,7 @@ render() {
   size="$(python3 -c 'import struct,sys; d=open(sys.argv[1],"rb").read(24); print("%dx%d" % struct.unpack(">II", d[16:24]))' "$capture")"
   [[ "$size" == "${width}x${height}" ]] || { echo "Bad render of $page ($size); $output left unchanged" >&2; exit 1; }
   mv "$capture" "$output"
+  rmdir "$directory"
   echo "Wrote $output"
 }
 
