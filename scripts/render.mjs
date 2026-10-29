@@ -17,7 +17,7 @@ export function renderPage(page, language = 'pt-BR') {
     `<${wrapper} class="db-panel cast ${first ? 'mt-15 ' : ''}mb-6" aria-labelledby="${id}"><${headingTag} class="db-panel-head" id="${id}">${tagged('span', titleKey)}</${headingTag}><div class="${bodyClasses}">${body}</div></${wrapper}>`;
   const separator = ' · ';
   const footer = `<footer class="pt-6">
-    <p class="db-meta mb-6 text-center">${tagged('span', 'tagline')}${separator}${tagged('span', 'by')} ${link(site.author, 'author')}${separator}${link(site.privacy, 'privacy')}${separator}${link(site.contact, 'contact')}</p>
+    <p class="db-meta mb-6 text-center">${tagged('span', 'tagline')}${separator}${tagged('span', 'by')} ${link(site.author, 'author')}${separator}${link(site.privacy, 'privacy')}${separator}${link(site.status, 'status')}${separator}${link(site.contact, 'contact')}</p>
     ${tagged('p', 'fromBrazil', ' class="db-note mb-6 text-center"')}
     <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
       ${tagged('span', 'support', ' class="db-micro mr-1 text-text-3"')}

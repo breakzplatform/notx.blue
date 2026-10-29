@@ -85,6 +85,10 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 .nx-ink-purple { --project-ink: var(--ink-purple); --project-ink-contrast: var(--on-purple); }
 .nx-ink-orange { --project-ink: var(--ink-orange); --project-ink-contrast: var(--on-orange); }
 .nx-ink-links-green { --project-ink: #2E6B3F; --project-ink-contrast: #FFFFFF; }
+.nx-ink-espelho { --project-ink: #000000; --project-ink-contrast: #FFFFFF; }
+[data-theme="dark"] .nx-ink-espelho { border-left-color: var(--text-1); }
+[data-theme="dark"] .nx-ink-espelho .db-btn-primary { border-color: var(--text-1); }
+:root[data-theme="terminal"] .nx-ink-espelho { --project-ink: var(--ink-amber); --project-ink-contrast: var(--on-amber); }
 :root[data-theme="terminal"] .nx-ink-links-green { --project-ink: var(--ink-green); --project-ink-contrast: var(--on-green); }
 
 /* App rows sit inside a casting panel, so they rest flat (.cast-flat). */

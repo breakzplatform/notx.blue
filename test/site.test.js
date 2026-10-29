@@ -46,7 +46,7 @@ test('real app data is complete, unique and rendered', async () => {
     assert.equal(html.includes(`id="${app.id}"`), app.listed !== false, app.id);
     for (const language of Object.keys(dictionaries)) assert.ok(translate(app.description, language));
   }
-  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['handles', 'orange']]);
+  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['handles', 'orange'], ['espelho', 'espelho']]);
   assert.equal(apps.find(app => app.id === 'links').source, 'https://github.com/breakzplatform/links.notx.blue');
   for (const url of externalUrls()) {
     assert.equal(new URL(url).protocol, 'https:');
@@ -144,7 +144,7 @@ test('used ink pairs meet 4.5:1 in every theme', async () => {
   assert.ok(contrast(literal[1], literal[2]) >= 4.5, 'links-green');
   for (const file of ['colors', 'dark', 'terminal']) {
     const tokens = Object.fromEntries([...(await read(`scripts/ds/tokens/${file}.css`)).matchAll(/--([\w-]+):\s*(#[a-f\d]{6});/gi)].map(([, key, value]) => [key, value]));
-    for (const ink of new Set(['blue', 'pix', 'sponsors', 'yellow', ...apps.filter(app => app.listed !== false && app.ink !== 'links-green').map(app => app.ink)])) {
+    for (const ink of new Set(['blue', 'pix', 'sponsors', 'yellow', ...apps.filter(app => app.listed !== false && !['links-green', 'espelho'].includes(app.ink)).map(app => app.ink)])) {
       assert.ok(contrast(tokens[`ink-${ink}`], tokens[`on-${ink}`]) >= 4.5, `${file}/${ink}`);
     }
     if (file === 'terminal') assert.ok(contrast(tokens['ink-green'], tokens['on-green']) >= 4.5, 'terminal/green');
@@ -209,8 +209,8 @@ test('home: one projects panel with the listed apps, then compact labels, bots a
     const html = renderPage('home', language);
     const panels = [...html.matchAll(/<section class="db-panel cast [^"]*" aria-labelledby="([^"]+)">/g)].map(match => match[1]);
     assert.deepEqual(panels, ['projects-title', 'labels-title', 'bots-title', 'handles-title']);
-    assert.equal([...html.matchAll(/class="nx-app cast-flat nx-ink-/g)].length, 5);
-    assert.equal([...html.matchAll(/class="db-btn db-btn-primary cast press"/g)].length, 5);
+    assert.equal([...html.matchAll(/class="nx-app cast-flat nx-ink-/g)].length, 6);
+    assert.equal([...html.matchAll(/class="db-btn db-btn-primary cast press"/g)].length, 6);
     assert.doesNotMatch(html, /enquete\.notx\.blue|trending\.notx\.blue/);
     const labels = html.match(/id="labels-title">([\s\S]*?)<\/section>/)[1];
     const bots = html.match(/id="bots-title">([\s\S]*?)<\/section>/)[1];

@@ -4,6 +4,7 @@ export const site = {
   contact: 'mailto:abuse@notx.blue',
   privacy: '/privacy',
   home: '/',
+  status: 'https://status.joseli.to/',
 };
 
 // Listed apps need an `ink`: a design-system ink name (resolved to --ink-<name>/--on-<name>) or
@@ -22,6 +23,7 @@ export const apps = [
   { id: 'share', name: 'share.notx.blue', description: 'app.share', url: 'https://share.notx.blue', source: 'https://github.com/breakzplatform/share.notx.blue', ink: 'purple' },
   { id: 'links', name: 'links.notx.blue', description: 'app.links', url: 'https://links.notx.blue', source: 'https://github.com/breakzplatform/links.notx.blue', ink: 'links-green' },
   { id: 'handles', name: 'handles.notx.blue', description: 'app.handles', url: 'https://handles.notx.blue', source: 'https://github.com/breakzplatform/bsky-public-handles', ink: 'orange' },
+  { id: 'espelho', name: 'espelho', description: 'app.espelho', url: 'https://espelho.notx.blue', ink: 'espelho' },
   { id: 'enquete', name: 'enquete.notx.blue', description: 'app.enquete', url: 'https://enquete.notx.blue', status: 'soon', listed: false },
   { id: 'trending', name: 'trending.notx.blue', description: 'app.trending', url: 'https://github.com/breakzplatform/trending.notx.blue', openLabel: 'viewRepository', status: 'archived', listed: false },
 ];
