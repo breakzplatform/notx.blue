@@ -195,9 +195,9 @@ test('masthead: one h1, the wordmark on home and the panel title elsewhere', () 
     for (const page of ['home', 'privacy', '404']) {
       const html = renderPage(page, language);
       assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
-      if (page === 'home') assert.match(html, /<h1 class="db-wordmark">notx<span class="ink-block tilt-cw">\.blue<\/span><\/h1>/);
+      if (page === 'home') assert.match(html, /<h1 class="db-wordmark"><span class="ink-block tilt-cw">!X<\/span>\.blue<\/h1>/);
       else {
-        assert.match(html, /<div class="db-wordmark"><a href="\/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">\.blue<\/span><\/a><\/div>/);
+        assert.match(html, /<div class="db-wordmark"><a href="\/" aria-label="notx.blue"><span class="ink-block tilt-cw">!X<\/span>\.blue<\/a><\/div>/);
         assert.match(html, /<h1 class="db-panel-head"/);
       }
     }

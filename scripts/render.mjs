@@ -35,8 +35,8 @@ export function renderPage(page, language = 'pt-BR') {
       </button>
     </div>`;
   const wordmark = page === 'home'
-    ? '<h1 class="db-wordmark">notx<span class="ink-block tilt-cw">.blue</span></h1>'
-    : '<div class="db-wordmark"><a href="/" aria-label="notx.blue">notx<span class="ink-block tilt-cw">.blue</span></a></div>';
+    ? '<h1 class="db-wordmark"><span class="ink-block tilt-cw">!X</span>.blue</h1>'
+    : '<div class="db-wordmark"><a href="/" aria-label="notx.blue"><span class="ink-block tilt-cw">!X</span>.blue</a></div>';
   let content;
   if (page === 'home') {
     const appRow = app => {
@@ -48,7 +48,7 @@ export function renderPage(page, language = 'pt-BR') {
         : link(app.url, app.openLabel || 'open', 'db-btn db-btn-primary cast press');
       return `<li class="nx-app cast-flat nx-ink-${app.ink}" id="${app.id}">
         <div>
-          <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.name"` : ''}>${escape(app.localized ? name('name') : app.name)}</h3>
+          <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.name"` : ''}>${escape(app.localized ? name('name') : app.name.replace(/\.notx\.blue$/, ''))}</h3>
           ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(aliasLink).join(', ')}</p>` : ''}
         </div>
         <div class="nx-app-actions">${openButton}${app.source ? sourceButton(app.source, '') : ''}</div>${app.rows ? app.rows.map(row => `
