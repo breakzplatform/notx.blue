@@ -128,9 +128,21 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 }
 
 .theme-switch svg { display: none; flex: none; }
-.theme-switch[data-next-theme="dark"] .theme-icon-dark,
-.theme-switch[data-next-theme="terminal"] .theme-icon-terminal,
-.theme-switch[data-next-theme="light"] .theme-icon-light { display: block; }
+/* Keyed on the theme theme-boot.js sets before the first paint, so the right
+   icon shows before main.js runs. */
+:root:not([data-theme="dark"]):not([data-theme="terminal"]) .theme-icon-dark,
+[data-theme="dark"] .theme-icon-terminal,
+[data-theme="terminal"] .theme-icon-light { display: block; }
+/* The visible label sits on top of hidden copies of every label it can show
+   (theme names, both language names), so the button keeps the width of the
+   longest one and never resizes. */
+.label-box { display: inline-grid; }
+.label-box > * { grid-area: 1 / 1; }
+.theme-switch .label-box > * { justify-self: start; }
+.label-sizer { visibility: hidden; }
+/* theme-boot.js sets data-i18n-pending when the page will be translated after
+   load; hiding it until then keeps the swap of texts from shifting the layout. */
+html[data-i18n-pending] body { visibility: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

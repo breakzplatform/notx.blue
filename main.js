@@ -16,5 +16,5 @@ languageButton.addEventListener('click', () => {
   try { localStorage.setItem('lang', language); } catch {}
   update();
 });
-languageButton.hidden = false;
 update();
+delete document.documentElement.dataset.i18nPending;

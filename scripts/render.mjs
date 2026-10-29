@@ -1,7 +1,7 @@
 import { writeFile, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { apps, site, support, secondary, handles } from '../site-data.js';
-import { translate } from '../i18n.js';
+import { dictionaries, translate } from '../i18n.js';
 
 export const escape = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 export function renderPage(page, language = 'pt-BR') {
@@ -26,12 +26,12 @@ export function renderPage(page, language = 'pt-BR') {
   </footer>`;
   const iconAttributes = 'width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"';
   const toggles = `<div class="flex flex-wrap items-center justify-end gap-2 pt-4">
-      <button id="language-toggle" class="db-btn db-btn-sm cast press" type="button" data-i18n="language" lang="${language === 'en' ? 'pt-BR' : 'en'}" hidden>${text('language')}</button>
-      <button id="theme-toggle" class="db-btn db-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="${escape(translate('themeButton', language).replace('{current}', translate('theme.light', language)).replace('{next}', translate('theme.dark', language)))}" hidden>
+      <button id="language-toggle" class="db-btn db-btn-sm cast press" type="button" lang="${language === 'en' ? 'pt-BR' : 'en'}"><span class="label-box"><span data-i18n="language">${text('language')}</span>${Object.keys(dictionaries).map(code => `<span class="label-sizer" aria-hidden="true">${escape(translate('language', code))}</span>`).join('')}</span></button>
+      <button id="theme-toggle" class="db-btn db-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="${escape(translate('themeButton', language).replace('{current}', translate('theme.light', language)).replace('{next}', translate('theme.dark', language)))}">
         <svg class="theme-icon-dark" ${iconAttributes}><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
         <svg class="theme-icon-terminal" ${iconAttributes}><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
         <svg class="theme-icon-light" ${iconAttributes}><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
-        <span data-theme-name>${text('theme.dark')}</span>
+        <span class="label-box"><span data-theme-name>${text('theme.dark')}</span>${['light', 'dark', 'terminal'].map(theme => `<span class="label-sizer" aria-hidden="true" data-i18n="theme.${theme}">${text(`theme.${theme}`)}</span>`).join('')}</span>
       </button>
     </div>`;
   const wordmark = page === 'home'
@@ -96,6 +96,11 @@ export function renderPage(page, language = 'pt-BR') {
   <meta name="twitter:image" content="${site.origin}/share.png">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script src="/theme-boot.js"></script>
+  <link rel="preload" href="https://static.joseli.to/assets/fonts/cmu-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://static.joseli.to/assets/fonts/cmu-sans-serif-500-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://static.joseli.to/assets/fonts/cmu-sans-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://static.joseli.to/assets/fonts/cmu-typewriter-text-500-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://static.joseli.to/assets/fonts/cmu-typewriter-text-700-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/tailwind-4.3.3.css">
   <link rel="stylesheet" href="/assets/site-v2.css">
   <script type="module" src="/main.js"></script>

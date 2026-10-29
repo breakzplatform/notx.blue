@@ -16,7 +16,6 @@ export function bindTheme(button, translate) {
     try { localStorage.setItem('theme', next); } catch {}
     update();
   });
-  button.hidden = false;
   update();
   return update;
 }

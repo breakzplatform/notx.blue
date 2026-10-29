@@ -59,7 +59,7 @@ test('local links and referenced files exist; external links belong to the data 
     for (const [, value] of (await read(page)).matchAll(/(?<![-\w])(?:href|src)="([^"]+)"/g)) {
       if (value.startsWith('#') || value.startsWith('mailto:')) continue;
       if (value.startsWith('https:')) {
-        assert.ok(externalUrls().includes(value) || value.startsWith('https://notx.blue/'));
+        assert.ok(externalUrls().includes(value) || value.startsWith('https://notx.blue/') || /^https:\/\/static\.joseli\.to\/assets\/fonts\/[\w-]+\.woff2$/.test(value));
         continue;
       }
       assert.ok(value.startsWith('/'));
@@ -123,6 +123,15 @@ test('theme boot starts light, honors choices and tolerates blocked storage', as
   }
 });
 
+test('theme boot hides the page only when it will be translated to English', async () => {
+  const source = await read('theme-boot.js');
+  for (const [saved, browser, pending] of [[null, 'en-US', true], [null, 'pt-BR', false], ['pt-BR', 'en-US', false], ['en', 'pt-BR', true], [null, undefined, false]]) {
+    const document = { documentElement: { dataset: {} } };
+    runInNewContext(source, { document, navigator: { language: browser }, setTimeout() {}, localStorage: { getItem: key => key === 'lang' ? saved : null } });
+    assert.equal('i18nPending' in document.documentElement.dataset, pending, `${saved} ${browser}`);
+  }
+});
+
 test('CSP denies inline scripts and limits external resources', async () => {
   const config = await read('netlify.toml');
   for (const directive of ["script-src 'self'", "style-src 'self'", "connect-src 'self'", "frame-ancestors 'none'", "font-src 'self' https://static.joseli.to"]) assert.ok(config.includes(directive));
@@ -183,6 +192,9 @@ test('pre-rendered theme buttons name the next theme, like down.blue', () => {
       assert.ok(button.includes('data-next-theme="dark"'));
       assert.ok(button.includes(`<span data-theme-name>${translate('theme.dark', language)}</span>`));
       assert.equal([...button.matchAll(/<svg /g)].length, 3);
+      // Rendered visible and sized for the longest theme name, so loading and toggling never shift the layout.
+      assert.doesNotMatch(html, /id="(language|theme)-toggle"[^>]*\shidden[\s>]/);
+      for (const theme of ['light', 'dark', 'terminal']) assert.ok(button.includes(`data-i18n="theme.${theme}">${translate(`theme.${theme}`, language)}</span>`));
       assert.ok(html.includes('class="flex flex-wrap items-center justify-end gap-2 pt-4"'));
       assert.ok(html.includes('class="mx-auto max-w-[880px] px-6 pb-16"'));
       assert.doesNotMatch(html, /<header/);
