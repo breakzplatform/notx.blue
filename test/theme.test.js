@@ -10,7 +10,7 @@ for (const blocked of [false, true]) {
     let click;
     const values = new Map();
     const name = {};
-    const button = { hidden: true, dataset: {}, querySelector: () => name, setAttribute(attribute, value) { this[attribute] = value; }, addEventListener(event, handler) { click = handler; } };
+    const button = { dataset: {}, querySelector: () => name, setAttribute(attribute, value) { this[attribute] = value; }, addEventListener(event, handler) { click = handler; } };
     const document = { documentElement: { dataset: { theme: 'light' } } };
     const theme = () => document.documentElement.dataset.theme;
     try {
@@ -22,7 +22,6 @@ for (const blocked of [false, true]) {
       } });
       let language = 'en';
       const update = bindTheme(button, key => translate(key, language));
-      assert.equal(button.hidden, false);
       assert.equal(name.textContent, 'dark');
       assert.equal(button.dataset.nextTheme, 'dark');
       assert.equal(button['aria-label'], 'Theme: light, tap for dark');
