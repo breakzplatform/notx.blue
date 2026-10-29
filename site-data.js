@@ -39,6 +39,7 @@ export const handles = [
 ];
 export const support = [
   { label: 'pix', url: 'https://pix.joseli.to', className: 'pix' },
+  { label: 'mercadopago', url: 'https://link.mercadopago.com.br/breakzplatform', className: 'mercadopago' },
   { label: 'coffee', url: 'https://buymeacoffee.com/joselito', className: 'coffee' },
   { label: 'sponsors', url: 'https://github.com/sponsors/breakzplatform', className: 'sponsors' },
 ];

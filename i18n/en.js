@@ -47,6 +47,7 @@ export default {
   "pessoas": "pessoas.dev",
   "ceuazul": "ceuazul.online",
   "pix": "Pix",
+  "mercadopago": "Mercado Pago",
   "coffee": "Buy Me a Coffee",
   "sponsors": "GitHub Sponsors",
   "privacy": "Privacy",
