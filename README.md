@@ -68,7 +68,7 @@ node scripts/render.mjs --check
 grep -v '^  command' netlify.toml > ../netlify.toml.tmp
 node scripts/prune.mjs
 mv ../netlify.toml.tmp netlify.toml
-npx netlify-cli deploy --dir . --site peppy-lamington-52fcd7
+npx netlify-cli deploy --dir . --site 388f9139-62ce-49ed-aa82-6a33a4085256  # peppy-lamington-52fcd7 (lookup by name fails)
 ```
 
 Add `--prod` to publish.
