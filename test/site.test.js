@@ -90,7 +90,7 @@ test('every footer has contact, privacy and the three support chips in order', a
     const footer = (await read(page)).match(/<footer class="pt-6">([\s\S]*?)<\/footer>/)[1];
     assert.match(footer, /mailto:abuse@notx.blue/);
     assert.match(footer, /href="\/privacy"/);
-    assert.deepEqual(support.map(entry => entry.label), ['pix', 'coffee', 'sponsors']);
+    assert.deepEqual(support.map(entry => entry.label), ['pix', 'mercadopago', 'coffee', 'sponsors']);
     assert.deepEqual([...footer.matchAll(/<a href="([^"]+)"[^>]*class="db-chip /g)].map(match => match[1]), support.map(entry => entry.url));
     assert.doesNotMatch(footer, /apoia\.se/);
     assert.match(footer, /class="db-meta mb-6 text-center"/);
