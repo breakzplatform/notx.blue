@@ -51,7 +51,7 @@ export function renderPage(page, language = 'pt-BR') {
           <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.name"` : ''}>${escape(app.localized ? name('name') : app.name.replace(/\.notx\.blue$/, ''))}</h3>
           ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(aliasLink).join(', ')}</p>` : ''}
         </div>
-        <div class="nx-app-actions">${openButton}${app.source ? sourceButton(app.source, '') : ''}</div>${app.rows ? app.rows.map(row => `
+        <div class="nx-app-actions">${app.source ? sourceButton(app.source, '') : ''}${openButton}</div>${app.rows ? app.rows.map(row => `
         <div class="nx-app-extension">${tagged('span', row.label, ' class="db-micro text-text-3"')}${row.links.map(([key, url]) => link(url, key)).join('')}${row.source ? sourceLink(row.source) : ''}</div>`).join('') : ''}
       </li>`;
     };
