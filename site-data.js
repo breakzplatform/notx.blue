@@ -17,7 +17,7 @@ export const apps = [
   { id: 'down', name: 'down.blue', description: 'app.down', url: 'https://down.blue', source: 'https://github.com/breakzplatform/down.blue', ink: 'down', aliases: ['https://downloader.notx.blue'], rows: [
     { label: 'extension', links: [['chrome', 'https://down.blue/chrome'], ['firefox', 'https://addons.mozilla.org/firefox/addon/down-blue/']], source: 'https://github.com/breakzplatform/down.blue-extension' },
     { label: 'blueskyBot', links: [['downBotHandle', 'https://bsky.app/profile/down.blue']], source: 'https://github.com/breakzplatform/down-blue-bot' },
-    { label: 'iosShortcut', links: [['shortcutAdd', 'https://www.icloud.com/shortcuts/dd6be3060b4d4d4caf45f494feb40a95']] },
+    { label: 'iosShortcut', links: [['shortcutAdd', 'https://www.icloud.com/shortcuts/aff431c40ab549ccae09202d8402384e']] },
   ] },
   { id: 'sorteio', name: 'sorteio.blue', description: 'app.sorteio', url: 'https://sorteio.blue', source: 'https://github.com/breakzplatform/skypicker.site', ink: 'magenta', localized: true, aliases: ['https://skypicker.site'] },
   { id: 'share', name: 'share.notx.blue', description: 'app.share', url: 'https://share.notx.blue', source: 'https://github.com/breakzplatform/share.notx.blue', ink: 'purple' },
