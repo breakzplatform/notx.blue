@@ -30,7 +30,7 @@ npm run check:links
 
 To add an app:
 
-1. Add its ID, name, URL, description key and ink to `site-data.js`, plus a matching `.nx-ink-<name>` pair in `assets/site-v2.css`. `listed: false` keeps it off the home page. Add a source URL only when the repository is public.
+1. Add its ID, name, URL, description key and ink to `site-data.js`, plus a matching `.nx-ink-<name>` pair in `assets/site-v2.css`. `listed: false` keeps it off the home page and `/privacy`; add `privacy: true` to keep it on `/privacy`. Add a source URL only when the repository is public.
 2. Add its description and its `privacy.<id>` paragraph to both dictionaries in `i18n/`, describing what the app actually does with data.
 3. Every ink background uses its `--on-*` text color (at least 4.5:1; the tests check it).
 4. Regenerate the HTML and run the tests.

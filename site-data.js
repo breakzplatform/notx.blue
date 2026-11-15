@@ -9,10 +9,12 @@ export const site = {
 
 // Listed apps need an `ink`: a design-system ink name (resolved to --ink-<name>/--on-<name>) or
 // 'links-green', the one literal colour (#2E6B3F under white text) defined in
-// assets/site-v2.css. `listed: false` keeps an app out of the home page and /privacy:
+// assets/site-v2.css. `listed: false` keeps an app out of the home page and /privacy, unless
+// `privacy: true` puts it back on /privacy (an app that links to the policy but has no card yet).
 // `localized: true` means the name and URL differ per language and come from the dictionaries
 // (app.<id>.name, .url, .aliasName, .aliasUrl); name/url/aliases then hold the pt-BR defaults.
 // enquete is a placeholder page and trending is discontinued.
+// sumidos is crickets.notx.blue in English.
 export const apps = [
   { id: 'down', name: 'down.blue', description: 'app.down', url: 'https://down.blue', source: 'https://github.com/breakzplatform/down.blue', ink: 'down', aliases: ['https://downloader.notx.blue'], rows: [
     { label: 'extension', links: [['chrome', 'https://down.blue/chrome'], ['firefox', 'https://addons.mozilla.org/firefox/addon/down-blue/']], source: 'https://github.com/breakzplatform/down.blue-extension' },
@@ -26,6 +28,7 @@ export const apps = [
   { id: 'espelho', name: 'espelho', description: 'app.espelho', url: 'https://espelho.notx.blue', ink: 'espelho' },
   { id: 'enquete', name: 'enquete.notx.blue', description: 'app.enquete', url: 'https://enquete.notx.blue', status: 'soon', listed: false },
   { id: 'trending', name: 'trending.notx.blue', description: 'app.trending', url: 'https://github.com/breakzplatform/trending.notx.blue', openLabel: 'viewRepository', status: 'archived', listed: false },
+  { id: 'sumidos', name: 'sumidos.notx.blue', description: 'app.sumidos', url: 'https://sumidos.notx.blue', localized: true, listed: false, privacy: true },
 ];
 
 export const secondary = [

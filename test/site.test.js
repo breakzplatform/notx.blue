@@ -38,7 +38,7 @@ test('real app data is complete, unique and rendered', async () => {
     assert.equal(new Set(apps.map(app => app[property])).size, apps.length);
   }
   assert.equal(new Set(listed.map(app => app.ink)).size, listed.length);
-  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending']);
+  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending', 'sumidos']);
   for (const app of apps) {
     assert.ok(app.name);
     assert.equal(new URL(app.url).protocol, 'https:');
@@ -75,7 +75,7 @@ test('privacy covers each app in both languages and is published at /privacy', a
     assert.match(html, /<title[^>]*>.+<\/title>/);
     assert.match(html, /<h1[^>]*>.+<\/h1>/);
     assert.match(html, /abuse@notx.blue/);
-    for (const app of apps.filter(app => app.listed !== false)) {
+    for (const app of apps.filter(app => app.listed !== false || app.privacy)) {
       assert.ok(html.includes(`id="privacy-${app.id}"`));
       assert.ok(html.includes(escape(translate(`privacy.${app.id}`, language))));
     }
@@ -225,6 +225,13 @@ test('home: one projects panel with the listed apps, then compact labels, bots a
 test('privacy leaves out apps hidden from the home page', () => {
   const html = renderPage('privacy');
   for (const id of ['enquete', 'trending']) assert.ok(!html.includes(`id="privacy-${id}"`));
+});
+
+test('sumidos has no home card but is covered on /privacy, named per language', () => {
+  assert.ok(!renderPage('home').includes('id="sumidos"'));
+  for (const [language, name] of Object.entries({ 'pt-BR': 'sumidos.notx.blue', en: 'crickets.notx.blue' })) {
+    assert.match(renderPage('privacy', language), new RegExp(`<section id="privacy-sumidos"><h2 data-i18n="app.sumidos.name">${name.replaceAll('.', '\\.')}</h2>`));
+  }
 });
 
 test('the giveaway app is named per language on the home page and /privacy', () => {
