@@ -38,7 +38,7 @@ test('real app data is complete, unique and rendered', async () => {
     assert.equal(new Set(apps.map(app => app[property])).size, apps.length);
   }
   assert.equal(new Set(listed.map(app => app.ink)).size, listed.length);
-  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending', 'sumidos']);
+  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending', 'sumidos', 'print']);
   for (const app of apps) {
     assert.ok(app.name);
     assert.equal(new URL(app.url).protocol, 'https:');

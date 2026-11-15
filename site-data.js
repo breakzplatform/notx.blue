@@ -29,6 +29,7 @@ export const apps = [
   { id: 'enquete', name: 'enquete.notx.blue', description: 'app.enquete', url: 'https://enquete.notx.blue', status: 'soon', listed: false },
   { id: 'trending', name: 'trending.notx.blue', description: 'app.trending', url: 'https://github.com/breakzplatform/trending.notx.blue', openLabel: 'viewRepository', status: 'archived', listed: false },
   { id: 'sumidos', name: 'sumidos.notx.blue', description: 'app.sumidos', url: 'https://sumidos.notx.blue', localized: true, listed: false, privacy: true },
+  { id: 'print', name: 'print.notx.blue', description: 'app.print', url: 'https://print.notx.blue', listed: false, privacy: true },
 ];
 
 export const secondary = [
