@@ -36,7 +36,7 @@ export function renderPage(page, language = 'pt-BR') {
     </div>`;
   const wordmark = page === 'home'
     ? '<h1 class="db-wordmark"><span class="ink-block tilt-cw">!X</span>.blue</h1>'
-    : '<div class="db-wordmark"><a href="/" aria-label="notx.blue"><span class="ink-block tilt-cw">!X</span>.blue</a></div>';
+    : '<div class="db-wordmark"><a href="/" aria-label="notx.blue" data-no-invert><span class="ink-block tilt-cw">!X</span>.blue</a></div>';
   let content;
   if (page === 'home') {
     const appRow = app => {
