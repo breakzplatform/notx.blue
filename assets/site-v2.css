@@ -72,13 +72,6 @@
 :root:not([data-theme="dark"]):not([data-theme="terminal"]) .theme-switch .icon-moon,
 [data-theme="dark"] .theme-switch .icon-terminal,
 [data-theme="terminal"] .theme-switch .icon-sun { display: block; }
-/* The visible label sits on top of hidden copies of every label it can show
-   (theme names, both language names), so the button keeps the width of the
-   longest one and never resizes. */
-.label-box { display: inline-grid; }
-.label-box > * { grid-area: 1 / 1; }
-.theme-switch .label-box > * { justify-self: start; }
-.label-sizer { visibility: hidden; }
 /* theme-boot.js sets data-i18n-pending when the page will be translated after
    load; hiding it until then keeps the swap of texts from shifting the layout. */
 html[data-i18n-pending] body { visibility: hidden; }

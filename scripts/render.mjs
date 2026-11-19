@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { apps, site, support, secondary, handles } from '../site-data.js';
-import { dictionaries, translate } from '../i18n.js';
+import { translate } from '../i18n.js';
 
 // /assets/* is served immutable for a year, so each stylesheet URL carries a
 // hash of its content: a changed file gets a new URL instead of a stale cache.
@@ -33,12 +33,12 @@ export function renderPage(page, language = 'pt-BR') {
   </footer>`;
   const iconAttributes = 'width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"';
   const toggles = `<div class="flex flex-wrap items-center justify-end gap-2 pt-4">
-      <button id="language-toggle" class="notx-btn notx-btn-sm cast press" type="button" lang="${language === 'en' ? 'pt-BR' : 'en'}"><span class="label-box"><span data-i18n="language">${text('language')}</span>${Object.keys(dictionaries).map(code => `<span class="label-sizer" aria-hidden="true">${escape(translate('language', code))}</span>`).join('')}</span></button>
+      <button id="language-toggle" class="notx-btn notx-btn-sm cast press" type="button" lang="${language === 'en' ? 'pt-BR' : 'en'}"><span data-i18n="language">${text('language')}</span></button>
       <button id="theme-toggle" class="notx-btn notx-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="${escape(translate('themeButton', language).replace('{current}', translate('theme.light', language)).replace('{next}', translate('theme.dark', language)))}">
         <svg class="icon icon-moon" ${iconAttributes}><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
         <svg class="icon icon-terminal" ${iconAttributes}><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
         <svg class="icon icon-sun" ${iconAttributes}><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
-        <span class="label-box"><span data-theme-name>${text('theme.dark')}</span>${['light', 'dark', 'terminal'].map(theme => `<span class="label-sizer" aria-hidden="true" data-i18n="theme.${theme}">${text(`theme.${theme}`)}</span>`).join('')}</span>
+        <span data-theme-name>${text('theme.dark')}</span>
       </button>
     </div>`;
   const wordmark = page === 'home'

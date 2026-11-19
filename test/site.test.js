@@ -192,9 +192,8 @@ test('pre-rendered theme buttons name the next theme, like down.blue', () => {
       assert.ok(button.includes('data-next-theme="dark"'));
       assert.ok(button.includes(`<span data-theme-name>${translate('theme.dark', language)}</span>`));
       assert.equal([...button.matchAll(/<svg /g)].length, 3);
-      // Rendered visible and sized for the longest theme name, so loading and toggling never shift the layout.
+      // Rendered visible, so the page does not drop when main.js runs.
       assert.doesNotMatch(html, /id="(language|theme)-toggle"[^>]*\shidden[\s>]/);
-      for (const theme of ['light', 'dark', 'terminal']) assert.ok(button.includes(`data-i18n="theme.${theme}">${translate(`theme.${theme}`, language)}</span>`));
       assert.ok(html.includes('class="flex flex-wrap items-center justify-end gap-2 pt-4"'));
       assert.ok(html.includes('class="notx-page"'));
       assert.doesNotMatch(html, /<header/);
