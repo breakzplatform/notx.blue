@@ -45,7 +45,7 @@ export default {
   "viewRepository": "View repository",
   "handles": "More domains for your handle",
   "orkut": "Etiquetas do Orkut",
-  "scorigami": "NFL Scorigami (in English)",
+  "scorigami": "NFL Scorigami",
   "week": "Semana Encerrada",
   "hours": "Horários Oficiais",
   "bolsonaro": "O Bolsonaro está preso?",
