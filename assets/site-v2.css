@@ -1,83 +1,20 @@
-/* notx.blue components. The .db-* rules below are copied verbatim from
-   down.blue's index.html (lines 33-81 and 191-200, minus the APOIA.se chip and
-   the rules for parts this site does not have) so the two sites stay one
-   family: keep them identical rather than tuning them here. The nx-* rules
-   after them are the only site-specific CSS. */
+/* notx.blue's own CSS. The family shell (page column, wordmark, panels,
+   buttons, footer, support chips) comes from the design system's
+   tailwind/notx.css, compiled into assets/tailwind-<version>.css; this file
+   only holds what the hub alone has: the app rows and the policy copy. */
 
-/* The wordmark: an ink block with the mark, then the suffix, in CMU Serif bold, the block tilted
-   +1.5deg like a sticker (.ink-block.tilt-cw). It runs past the top of the
-   type scale on purpose: this is a one-page tool and the masthead is the
-   only display type it has. */
-.db-wordmark {
-  margin: var(--space-10) 0 var(--space-6);
-  font: var(--weight-display) clamp(var(--text-display-1), 13vw, 116px)/1.1 var(--font-display);
-  letter-spacing: var(--tracking-display);
-  color: var(--text-1);
-  text-align: center;
-  white-space: nowrap;
-}
+/* Tag labels: typewriter caps, tracked out. */
+.nx-micro { font: var(--type-label); text-transform: uppercase; letter-spacing: var(--tracking-meta); }
 
-/* Meta lines, tags and labels: typewriter, uppercase, tracked out. */
-.db-meta { font: var(--type-meta); text-transform: uppercase; letter-spacing: var(--tracking-meta); color: var(--text-3); }
-.db-micro { font: var(--type-label); text-transform: uppercase; letter-spacing: var(--tracking-meta); }
-/* Running machine output and fine print: typewriter, but readable. */
-.db-note { font: var(--type-code); color: var(--text-3); }
-
-/* Every box title — panel head, callout spine — is the same object: an ink
-   block in typewriter caps. The panel itself carries .cast. */
-.db-panel { background: var(--surface-card); }
-.db-panel-head {
-  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
-  margin: 0; padding: var(--box-head-pad); border-bottom: var(--border);
-  background: var(--project-ink); color: var(--project-ink-contrast);
-  font: var(--weight-bold) var(--text-caption)/1.3 var(--font-mono);
-  letter-spacing: var(--tracking-meta); text-transform: uppercase;
-}
-
-/* Buttons carry only their type and colour; .cast.press in the markup does
-   the halftone shadow, the lift on hover and the slam on press. */
-.db-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3);
-  background: var(--surface-page); color: var(--text-1);
-  font: var(--weight-bold) var(--text-body-sm)/1.25 var(--font-body);
-  padding: 8px 12px; cursor: pointer; text-align: center; text-decoration: none;
-}
-a.db-btn, a.db-btn:visited, a.db-btn:hover { color: var(--text-1); background: var(--surface-page); text-decoration: none; }
-.db-btn-primary, a.db-btn-primary, a.db-btn-primary:visited, a.db-btn-primary:hover {
-  background: var(--project-ink); border-color: var(--project-ink); color: var(--project-ink-contrast);
-}
-.db-btn-danger { background: var(--ink-red); border-color: var(--ink-red); color: var(--on-red); }
-/* Disabled: no travel, no shadow (.press handles both), a sunken fill and
-   the second text colour. Never an opacity fade. */
-.db-btn:disabled, .db-btn-primary:disabled, .db-btn-danger:disabled {
-  background: var(--surface-sunken); border-color: var(--border-strong); color: var(--text-2); cursor: not-allowed;
-}
-.db-btn-sm { padding: 4px 7px; font-size: var(--text-meta); }
-
-/* Support links: each takes a system ink with its on-* partner, so they
-   stay legible in all three themes. */
-.db-chip {
-  display: inline-flex; align-items: center; padding: 5px 9px;
-  font: var(--type-label); text-transform: uppercase; letter-spacing: var(--tracking-meta); text-decoration: none;
-}
-a.db-chip-pix, a.db-chip-pix:visited, a.db-chip-pix:hover { background: var(--ink-pix); color: var(--on-pix); }
-a.db-chip-mercadopago, a.db-chip-mercadopago:visited, a.db-chip-mercadopago:hover { background: #00B1EA; color: #000; }
-a.db-chip-coffee, a.db-chip-coffee:visited, a.db-chip-coffee:hover { background: var(--ink-yellow); color: var(--on-yellow); }
-a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { background: var(--ink-sponsors); color: var(--on-sponsors); }
-
-/* ---- notx.blue only ---- */
 
 [hidden] { display: none !important; }
 
 .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10; padding: 12px; background: var(--surface-card); color: var(--text-1); }
 .skip-link:focus { top: 8px; }
 
-/* Wordmark on pages where the h1 is the panel title: same type, but a link home. */
-.db-wordmark .ink-block { background: var(--ink-blue); color: var(--on-blue); }
-.db-wordmark a, .db-wordmark a:visited, .db-wordmark a:hover { color: inherit; text-decoration: none; }
 
 /* One ink per project. Every pair sets --project-ink and its on-ink partner so
-   .db-btn-primary and .db-panel-head inside the row pick it up. The design
+   .notx-btn-primary and .notx-panel-head inside the row pick it up. The design
    system has no green with white text, so links.notx.blue uses a literal
    #2E6B3F (white text, 6.5:1); terminal swaps it for the system's mono ink. */
 .nx-ink-down { --project-ink: var(--ink-down); --project-ink-contrast: var(--on-down); }
@@ -87,7 +24,7 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 .nx-ink-links-green { --project-ink: #2E6B3F; --project-ink-contrast: #FFFFFF; }
 .nx-ink-espelho { --project-ink: #000000; --project-ink-contrast: #FFFFFF; }
 [data-theme="dark"] .nx-ink-espelho { border-left-color: var(--text-1); }
-[data-theme="dark"] .nx-ink-espelho .db-btn-primary { border-color: var(--text-1); }
+[data-theme="dark"] .nx-ink-espelho .notx-btn-primary { border-color: var(--text-1); }
 :root[data-theme="terminal"] .nx-ink-espelho { --project-ink: var(--ink-amber); --project-ink-contrast: var(--on-amber); }
 :root[data-theme="terminal"] .nx-ink-links-green { --project-ink: var(--ink-green); --project-ink-contrast: var(--on-green); }
 
@@ -107,7 +44,7 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 .nx-link-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); }
 .nx-app-actions { align-items: stretch; }
 .nx-app-extension { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3); font: var(--text-body-sm)/1.4 var(--font-body); }
-/* Neutral secondary button: .db-btn paper fill and ink border, mono label, so it
+/* Neutral secondary button: .notx-btn paper fill and ink border, mono label, so it
    never competes with the app's ink on "Open project". */
 .nx-source { font-family: var(--font-mono); font-weight: var(--weight-bold); font-size: var(--text-meta); gap: var(--space-2); }
 .nx-source-link { font-size: var(--text-meta); }
@@ -124,13 +61,8 @@ a.db-chip-sponsors, a.db-chip-sponsors:visited, a.db-chip-sponsors:hover { backg
 /* Small buttons and chips match down.blue on a pointer; on touch they grow to
    the 44px target. */
 @media (pointer: coarse) {
-  .db-btn, .db-chip { min-height: 44px; }
+  .notx-btn, .notx-chip { min-height: var(--target); }
 }
-
-.theme-switch svg { display: none; flex: none; }
-.theme-switch[data-next-theme="dark"] .theme-icon-dark,
-.theme-switch[data-next-theme="terminal"] .theme-icon-terminal,
-.theme-switch[data-next-theme="light"] .theme-icon-light { display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

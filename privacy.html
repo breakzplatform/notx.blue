@@ -21,25 +21,25 @@
   <meta name="twitter:image" content="https://notx.blue/share.png">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script src="/theme-boot.js"></script>
-  <link rel="stylesheet" href="/assets/tailwind-4.3.3.css">
-  <link rel="stylesheet" href="/assets/site-v2.css">
+  <link rel="stylesheet" href="/assets/tailwind-4.3.3.css?v=ace7dd0ea7">
+  <link rel="stylesheet" href="/assets/site-v2.css?v=8e741df29e">
   <script type="module" src="/main.js"></script>
 </head>
 <body>
   <a href="#main" class="skip-link" data-i18n="skip">Pular para o conteúdo</a>
-  <div class="mx-auto max-w-[880px] px-6 pb-16">
+  <div class="notx-page">
     <div class="flex flex-wrap items-center justify-end gap-2 pt-4">
-      <button id="language-toggle" class="db-btn db-btn-sm cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
-      <button id="theme-toggle" class="db-btn db-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="Tema: claro, toque para escuro" hidden>
-        <svg class="theme-icon-dark" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
-        <svg class="theme-icon-terminal" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
-        <svg class="theme-icon-light" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+      <button id="language-toggle" class="notx-btn notx-btn-sm cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
+      <button id="theme-toggle" class="notx-btn notx-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="Tema: claro, toque para escuro" hidden>
+        <svg class="icon icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
+        <svg class="icon icon-terminal" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
+        <svg class="icon icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
         <span data-theme-name>escuro</span>
       </button>
     </div>
     <main id="main" tabindex="-1">
-      <div class="db-wordmark"><a href="/" aria-label="notx.blue" data-no-invert><span class="ink-block tilt-cw">!X</span>.blue</a></div>
-      <article class="db-panel cast mt-15 mb-6" aria-labelledby="privacy-title"><h1 class="db-panel-head" id="privacy-title"><span data-i18n="privacy">Privacidade</span></h1><div class="nx-policy p-4"><p data-i18n="updated" class="db-micro">Última atualização: 18 de novembro de 2026.</p><p data-i18n="privacyIntro">Não vendo nem armazeno nenhum dado privado seu e não utilizo os seus dados para nenhuma finalidade, inclusive para o treinamento de inteligência artificial. Estes sites não usam analytics nem anúncios, e a sua senha nunca passa por eles, pois o login é feito pelo próprio Bluesky. Quase tudo é processado no seu navegador, e o que é salvo permanece nele. A seguir, o que cada aplicativo faz.</p>
+      <div class="notx-wordmark"><a href="/" aria-label="notx.blue" data-no-invert><span class="ink-block tilt-cw">!X</span>.blue</a></div>
+      <article class="cast notx-panel mt-15" aria-labelledby="privacy-title"><h1 class="notx-panel-head" id="privacy-title"><span data-i18n="privacy">Privacidade</span></h1><div class="nx-policy p-4"><p data-i18n="updated" class="nx-micro">Última atualização: 18 de novembro de 2026.</p><p data-i18n="privacyIntro">Não vendo nem armazeno nenhum dado privado seu e não utilizo os seus dados para nenhuma finalidade, inclusive para o treinamento de inteligência artificial. Estes sites não usam analytics nem anúncios, e a sua senha nunca passa por eles, pois o login é feito pelo próprio Bluesky. Quase tudo é processado no seu navegador, e o que é salvo permanece nele. A seguir, o que cada aplicativo faz.</p>
     <section id="privacy-down"><h2>down.blue</h2><p data-i18n="privacy.down">Baixa vídeos, GIFs e imagens de posts públicos direto no seu navegador, sem login. O histórico de downloads fica só no seu navegador, e você pode apagá-lo no app. Ao gerar um link curto, o endereço do post vai para o da.gd, o encurtador. A extensão só abre o post no site quando você pede.</p></section>
     <section id="privacy-sorteio"><h2 data-i18n="app.sorteio.name">sorteio.blue</h2><p data-i18n="privacy.sorteio">O login é pelo Bluesky, e a sessão fica num cookie protegido que dura 30 dias ou até você sair. Não há banco de dados. O sorteio roda no seu navegador; o link do resultado traz o post, as contagens e os nomes dos vencedores, e qualquer pessoa com o link consegue ler. Links curtos passam pelo da.gd.</p></section>
     <section id="privacy-share"><h2>share.notx.blue</h2><p data-i18n="privacy.share">É uma extensão do navegador: troca o botão de compartilhar do X pelo cliente que você escolher, como o Bluesky ou o Mastodon. Ela não lê as páginas, não passa por servidor nenhum e nunca publica nada sozinha. Suas escolhas ficam salvas no navegador, que pode sincronizá-las entre os seus dispositivos.</p></section>
@@ -49,15 +49,15 @@
     <section id="privacy-sumidos"><h2 data-i18n="app.sumidos.name">sumidos.notx.blue</h2><p data-i18n="privacy.sumidos">Mostra quem uma conta segue e parou de postar, lendo dados públicos do Bluesky no seu navegador. O login só é preciso para deixar de seguir, e a sessão fica só na aba em que você entrou. A última lista e as contas que você deixou de seguir ficam salvas no seu navegador, para você voltar depois ou seguir de novo; o botão de limpar apaga a lista.</p></section>
     <section id="common"><h2 data-i18n="commonTitle">Outros serviços</h2><p data-i18n="common">Os sites ficam hospedados na Netlify. As fotos de perfil vêm do Bluesky, e as fontes, de static.joseli.to. Como em qualquer site, esses servidores veem o seu endereço IP. O formulário de bugs recebe só o que você escrever nele. Links para fora, como os de apoio (Pix, Mercado Pago e outros), seguem as regras de cada serviço.</p></section><section id="retention"><h2 data-i18n="retentionTitle">Como apagar</h2><p data-i18n="retention">Para apagar o que fica no navegador, limpe os dados do site. Para cortar o acesso de um app à sua conta, saia dele e revogue a autorização nas configurações do Bluesky. O que foi publicado no Bluesky, como um ícone, fica lá até você apagar.</p></section><section id="changes"><h2 data-i18n="changesTitle">Mudanças e contato</h2><p data-i18n="changes">Mudanças nesta política são publicadas em /privacy, com nova data. Dúvidas e denúncias:</p><a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></section></div></article>
     </main>
-    <footer class="pt-6">
-    <p class="db-meta mb-6 text-center"><span data-i18n="tagline">Projetos para o Bluesky</span> · <span data-i18n="by">feito por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a> · <a href="/privacy" data-i18n="privacy">Privacidade</a> · <a href="https://status.joseli.to/" target="_blank" rel="noopener" data-i18n="status">status</a> · <a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></p>
-    <p data-i18n="fromBrazil" class="db-note mb-6 text-center">Direto do Brasil pelo Joselito, com muito carinho. Este site não usa cookies nem coleta dados. Este site não tem relação com o Bluesky.</p>
-    <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
-      <span data-i18n="support" class="db-micro mr-1 text-text-3">Apoie</span>
-      <a href="https://pix.joseli.to" target="_blank" rel="noopener" class="db-chip db-chip-pix cast press" data-i18n="pix">Pix</a>
-      <a href="https://link.mercadopago.com.br/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-mercadopago cast press" data-i18n="mercadopago">Mercado Pago</a>
-      <a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="db-chip db-chip-coffee cast press" data-i18n="coffee">Buy Me a Coffee</a>
-      <a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-sponsors cast press" data-i18n="sponsors">GitHub Sponsors</a>
+    <footer class="notx-footer">
+    <p class="notx-meta text-center"><span data-i18n="tagline">Projetos para o Bluesky</span> · <span data-i18n="by">feito por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a> · <a href="/privacy" data-i18n="privacy">Privacidade</a> · <a href="https://status.joseli.to/" target="_blank" rel="noopener" data-i18n="status">status</a> · <a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></p>
+    <p data-i18n="fromBrazil" class="notx-note text-center">Direto do Brasil pelo Joselito, com muito carinho. Este site não usa cookies nem coleta dados. Este site não tem relação com o Bluesky.</p>
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <span data-i18n="support" class="nx-micro mr-1 text-text-3">Apoie</span>
+      <a href="https://pix.joseli.to" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-pix text-on-pix" data-i18n="pix">Pix</a>
+      <a href="https://link.mercadopago.com.br/breakzplatform" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-mercadopago text-on-mercadopago" data-i18n="mercadopago">Mercado Pago</a>
+      <a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-yellow text-on-yellow" data-i18n="coffee">Buy Me a Coffee</a>
+      <a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-sponsors text-on-sponsors" data-i18n="sponsors">GitHub Sponsors</a>
     </div>
   </footer>
   </div>

@@ -44,10 +44,10 @@ export const handles = [
   { label: 'ceuazul', url: 'https://ceuazul.online' },
 ];
 export const support = [
-  { label: 'pix', url: 'https://pix.joseli.to', className: 'pix' },
-  { label: 'mercadopago', url: 'https://link.mercadopago.com.br/breakzplatform', className: 'mercadopago' },
-  { label: 'coffee', url: 'https://buymeacoffee.com/joselito', className: 'coffee' },
-  { label: 'sponsors', url: 'https://github.com/sponsors/breakzplatform', className: 'sponsors' },
+  { label: 'pix', url: 'https://pix.joseli.to', ink: 'pix' },
+  { label: 'mercadopago', url: 'https://link.mercadopago.com.br/breakzplatform', ink: 'mercadopago' },
+  { label: 'coffee', url: 'https://buymeacoffee.com/joselito', ink: 'yellow' },
+  { label: 'sponsors', url: 'https://github.com/sponsors/breakzplatform', ink: 'sponsors' },
 ];
 
 export function externalUrls() {

@@ -49,7 +49,6 @@ fi
 rm -rf "${WORK}"
 mkdir -p "${WORK}"
 cp -R "${SCRIPT_DIR}/ds" "${WORK}/ds"
-cp "${SCRIPT_DIR}/tailwind-theme.css" "${WORK}/tailwind-theme.css"
 
 # The entry is compiled from .build/, so every @source must become absolute.
 sed "s#@source \"\.\./#@source \"${ROOT_DIR}/#" \

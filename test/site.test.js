@@ -87,13 +87,13 @@ test('privacy covers each app in both languages and is published at /privacy', a
 
 test('every footer has contact, privacy and the three support chips in order', async () => {
   for (const page of pages) {
-    const footer = (await read(page)).match(/<footer class="pt-6">([\s\S]*?)<\/footer>/)[1];
+    const footer = (await read(page)).match(/<footer class="notx-footer">([\s\S]*?)<\/footer>/)[1];
     assert.match(footer, /mailto:abuse@notx.blue/);
     assert.match(footer, /href="\/privacy"/);
     assert.deepEqual(support.map(entry => entry.label), ['pix', 'mercadopago', 'coffee', 'sponsors']);
-    assert.deepEqual([...footer.matchAll(/<a href="([^"]+)"[^>]*class="db-chip /g)].map(match => match[1]), support.map(entry => entry.url));
+    assert.deepEqual([...footer.matchAll(/<a href="([^"]+)"[^>]*class="notx-chip /g)].map(match => match[1]), support.map(entry => entry.url));
     assert.doesNotMatch(footer, /apoia\.se/);
-    assert.match(footer, /class="db-meta mb-6 text-center"/);
+    assert.match(footer, /class="notx-meta text-center"/);
     assert.match(footer, /data-i18n="fromBrazil"/);
     assert.doesNotMatch(footer, /data-i18n="respect"/);
   }
@@ -184,7 +184,7 @@ test('pre-rendered theme buttons name the next theme, like down.blue', () => {
       assert.ok(button.includes(`<span data-theme-name>${translate('theme.dark', language)}</span>`));
       assert.equal([...button.matchAll(/<svg /g)].length, 3);
       assert.ok(html.includes('class="flex flex-wrap items-center justify-end gap-2 pt-4"'));
-      assert.ok(html.includes('class="mx-auto max-w-[880px] px-6 pb-16"'));
+      assert.ok(html.includes('class="notx-page"'));
       assert.doesNotMatch(html, /<header/);
     }
   }
@@ -195,10 +195,10 @@ test('masthead: one h1, the wordmark on home and the panel title elsewhere', () 
     for (const page of ['home', 'privacy', '404']) {
       const html = renderPage(page, language);
       assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
-      if (page === 'home') assert.match(html, /<h1 class="db-wordmark"><span class="ink-block tilt-cw">!X<\/span>\.blue<\/h1>/);
+      if (page === 'home') assert.match(html, /<h1 class="notx-wordmark"><span class="ink-block tilt-cw">!X<\/span>\.blue<\/h1>/);
       else {
-        assert.match(html, /<div class="db-wordmark"><a href="\/" aria-label="notx.blue" data-no-invert><span class="ink-block tilt-cw">!X<\/span>\.blue<\/a><\/div>/);
-        assert.match(html, /<h1 class="db-panel-head"/);
+        assert.match(html, /<div class="notx-wordmark"><a href="\/" aria-label="notx.blue" data-no-invert><span class="ink-block tilt-cw">!X<\/span>\.blue<\/a><\/div>/);
+        assert.match(html, /<h1 class="notx-panel-head"/);
       }
     }
   }
@@ -207,10 +207,10 @@ test('masthead: one h1, the wordmark on home and the panel title elsewhere', () 
 test('home: one projects panel with the listed apps, then compact labels, bots and domains panels', () => {
   for (const language of Object.keys(dictionaries)) {
     const html = renderPage('home', language);
-    const panels = [...html.matchAll(/<section class="db-panel cast [^"]*" aria-labelledby="([^"]+)">/g)].map(match => match[1]);
+    const panels = [...html.matchAll(/<section class="cast notx-panel[^"]*" aria-labelledby="([^"]+)">/g)].map(match => match[1]);
     assert.deepEqual(panels, ['projects-title', 'labels-title', 'bots-title', 'handles-title']);
     assert.equal([...html.matchAll(/class="nx-app cast-flat nx-ink-/g)].length, 6);
-    assert.equal([...html.matchAll(/class="db-btn db-btn-primary cast press"/g)].length, 6);
+    assert.equal([...html.matchAll(/class="notx-btn notx-btn-primary cast press"/g)].length, 6);
     assert.doesNotMatch(html, /enquete\.notx\.blue|trending\.notx\.blue/);
     const labels = html.match(/id="labels-title">([\s\S]*?)<\/section>/)[1];
     const bots = html.match(/id="bots-title">([\s\S]*?)<\/section>/)[1];
@@ -239,7 +239,7 @@ test('the giveaway app is named per language on the home page and /privacy', () 
   for (const [language, [name, alias]] of Object.entries(expected)) {
     const home = renderPage('home', language).match(/<li class="nx-app[^"]*" id="sorteio">([\s\S]*?)<\/li>/)[1];
     assert.match(home, new RegExp(`<h3 class="nx-app-name"[^>]*>${name.replace('.', '\\.')}</h3>`));
-    assert.match(home, new RegExp(`href="https://${name.replace('.', '\\.')}"[^>]*class="db-btn db-btn-primary`));
+    assert.match(home, new RegExp(`href="https://${name.replace('.', '\\.')}"[^>]*class="notx-btn notx-btn-primary`));
     assert.match(home, new RegExp(`data-i18n="alsoAt">[^<]*</span> <a href="https://${alias.replace('.', '\\.')}"`));
     assert.match(renderPage('privacy', language), new RegExp(`<h2 data-i18n="app.sorteio.name">${name.replace('.', '\\.')}</h2>`));
   }

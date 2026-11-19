@@ -21,25 +21,25 @@
   <meta name="twitter:image" content="https://notx.blue/share.png">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script src="/theme-boot.js"></script>
-  <link rel="stylesheet" href="/assets/tailwind-4.3.3.css">
-  <link rel="stylesheet" href="/assets/site-v2.css">
+  <link rel="stylesheet" href="/assets/tailwind-4.3.3.css?v=ace7dd0ea7">
+  <link rel="stylesheet" href="/assets/site-v2.css?v=8e741df29e">
   <script type="module" src="/main.js"></script>
 </head>
 <body>
   <a href="#main" class="skip-link" data-i18n="skip">Pular para o conteúdo</a>
-  <div class="mx-auto max-w-[880px] px-6 pb-16">
+  <div class="notx-page">
     <div class="flex flex-wrap items-center justify-end gap-2 pt-4">
-      <button id="language-toggle" class="db-btn db-btn-sm cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
-      <button id="theme-toggle" class="db-btn db-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="Tema: claro, toque para escuro" hidden>
-        <svg class="theme-icon-dark" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
-        <svg class="theme-icon-terminal" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
-        <svg class="theme-icon-light" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+      <button id="language-toggle" class="notx-btn notx-btn-sm cast press" type="button" data-i18n="language" lang="en" hidden>english</button>
+      <button id="theme-toggle" class="notx-btn notx-btn-sm cast press theme-switch" type="button" data-next-theme="dark" aria-label="Tema: claro, toque para escuro" hidden>
+        <svg class="icon icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
+        <svg class="icon icon-terminal" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19h8" /><path d="m4 17 6-6-6-6" /></svg>
+        <svg class="icon icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
         <span data-theme-name>escuro</span>
       </button>
     </div>
     <main id="main" tabindex="-1">
-      <h1 class="db-wordmark"><span class="ink-block tilt-cw">!X</span>.blue</h1>
-      <section class="db-panel cast mt-15 mb-6" aria-labelledby="projects-title"><h2 class="db-panel-head" id="projects-title"><span data-i18n="panelTitle">Projetos para o Bluesky</span></h2><div class="p-4"><p class="mb-5"><span data-i18n="lead">notx.blue é a casa dos projetos do Joselito para o Bluesky, por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a>.</p>
+      <h1 class="notx-wordmark"><span class="ink-block tilt-cw">!X</span>.blue</h1>
+      <section class="cast notx-panel mt-15" aria-labelledby="projects-title"><h2 class="notx-panel-head" id="projects-title"><span data-i18n="panelTitle">Projetos para o Bluesky</span></h2><div class="p-4"><p class="mt-0 mb-5"><span data-i18n="lead">notx.blue é a casa dos projetos do Joselito para o Bluesky, por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a>.</p>
       <ul class="nx-apps">
       <li class="nx-app cast-flat nx-ink-down" id="down">
         <div>
@@ -47,10 +47,10 @@
           <p data-i18n="app.down" class="nx-app-text">Baixe vídeos do Bluesky direto no navegador.</p>
           <p class="nx-app-aside"><span data-i18n="alsoAt">também em</span> <a href="https://downloader.notx.blue" target="_blank" rel="noopener">downloader.notx.blue</a></p>
         </div>
-        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/down.blue" target="_blank" rel="noopener" class="db-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://down.blue" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
-        <div class="nx-app-extension"><span data-i18n="extension" class="db-micro text-text-3">Extensão de navegador</span><a href="https://down.blue/chrome" target="_blank" rel="noopener" data-i18n="chrome">Chrome</a><a href="https://addons.mozilla.org/firefox/addon/down-blue/" target="_blank" rel="noopener" data-i18n="firefox">Firefox</a><a href="https://github.com/breakzplatform/down.blue-extension" target="_blank" rel="noopener" class="nx-source-link" data-i18n="source">Código-fonte</a></div>
-        <div class="nx-app-extension"><span data-i18n="blueskyBot" class="db-micro text-text-3">Bot do Bluesky</span><a href="https://bsky.app/profile/down.blue" target="_blank" rel="noopener" data-i18n="downBotHandle">@down.blue</a><a href="https://github.com/breakzplatform/down-blue-bot" target="_blank" rel="noopener" class="nx-source-link" data-i18n="source">Código-fonte</a></div>
-        <div class="nx-app-extension"><span data-i18n="iosShortcut" class="db-micro text-text-3">Atalho do iOS</span><a href="https://www.icloud.com/shortcuts/aff431c40ab549ccae09202d8402384e" target="_blank" rel="noopener" data-i18n="shortcutAdd">Adicionar aos Atalhos</a></div>
+        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/down.blue" target="_blank" rel="noopener" class="notx-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://down.blue" target="_blank" rel="noopener" class="notx-btn notx-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
+        <div class="nx-app-extension"><span data-i18n="extension" class="nx-micro text-text-3">Extensão de navegador</span><a href="https://down.blue/chrome" target="_blank" rel="noopener" data-i18n="chrome">Chrome</a><a href="https://addons.mozilla.org/firefox/addon/down-blue/" target="_blank" rel="noopener" data-i18n="firefox">Firefox</a><a href="https://github.com/breakzplatform/down.blue-extension" target="_blank" rel="noopener" class="nx-source-link" data-i18n="source">Código-fonte</a></div>
+        <div class="nx-app-extension"><span data-i18n="blueskyBot" class="nx-micro text-text-3">Bot do Bluesky</span><a href="https://bsky.app/profile/down.blue" target="_blank" rel="noopener" data-i18n="downBotHandle">@down.blue</a><a href="https://github.com/breakzplatform/down-blue-bot" target="_blank" rel="noopener" class="nx-source-link" data-i18n="source">Código-fonte</a></div>
+        <div class="nx-app-extension"><span data-i18n="iosShortcut" class="nx-micro text-text-3">Atalho do iOS</span><a href="https://www.icloud.com/shortcuts/aff431c40ab549ccae09202d8402384e" target="_blank" rel="noopener" data-i18n="shortcutAdd">Adicionar aos Atalhos</a></div>
       </li>
       <li class="nx-app cast-flat nx-ink-magenta" id="sorteio">
         <div>
@@ -58,50 +58,50 @@
           <p data-i18n="app.sorteio" class="nx-app-text">Faça sorteios entre quem curtiu ou repostou no Bluesky.</p>
           <p class="nx-app-aside"><span data-i18n="alsoAt">também em</span> <a href="https://skypicker.site" target="_blank" rel="noopener" data-i18n="app.sorteio.aliasName" data-i18n-href="app.sorteio.aliasUrl">skypicker.site</a></p>
         </div>
-        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/skypicker.site" target="_blank" rel="noopener" class="db-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://sorteio.blue" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="open" data-i18n-href="app.sorteio.url">Abrir projeto</a></div>
+        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/skypicker.site" target="_blank" rel="noopener" class="notx-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://sorteio.blue" target="_blank" rel="noopener" class="notx-btn notx-btn-primary cast press" data-i18n="open" data-i18n-href="app.sorteio.url">Abrir projeto</a></div>
       </li>
       <li class="nx-app cast-flat nx-ink-purple" id="share">
         <div>
           <h3 class="nx-app-name">share</h3>
           <p data-i18n="app.share" class="nx-app-text">Troque botões de compartilhar no Twitter/X por Bluesky, no Firefox e Chrome.</p>
         </div>
-        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/share.notx.blue" target="_blank" rel="noopener" class="db-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://share.notx.blue" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
+        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/share.notx.blue" target="_blank" rel="noopener" class="notx-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://share.notx.blue" target="_blank" rel="noopener" class="notx-btn notx-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
       </li>
       <li class="nx-app cast-flat nx-ink-links-green" id="links">
         <div>
           <h3 class="nx-app-name">links</h3>
           <p data-i18n="app.links" class="nx-app-text">Entre com o Bluesky e escolha um ícone para cada link do seu perfil.</p>
         </div>
-        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/links.notx.blue" target="_blank" rel="noopener" class="db-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://links.notx.blue" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
+        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/links.notx.blue" target="_blank" rel="noopener" class="notx-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://links.notx.blue" target="_blank" rel="noopener" class="notx-btn notx-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
       </li>
       <li class="nx-app cast-flat nx-ink-orange" id="handles">
         <div>
           <h3 class="nx-app-name">handles</h3>
           <p data-i18n="app.handles" class="nx-app-text">Encontre domínios públicos para usar no seu handle do Bluesky.</p>
         </div>
-        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/bsky-public-handles" target="_blank" rel="noopener" class="db-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://handles.notx.blue" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
+        <div class="nx-app-actions"><a href="https://github.com/breakzplatform/bsky-public-handles" target="_blank" rel="noopener" class="notx-btn nx-source  cast press"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg><span data-i18n="source">Código-fonte</span></a><a href="https://handles.notx.blue" target="_blank" rel="noopener" class="notx-btn notx-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
       </li>
       <li class="nx-app cast-flat nx-ink-espelho" id="espelho">
         <div>
           <h3 class="nx-app-name">espelho</h3>
           <p data-i18n="app.espelho" class="nx-app-text">Espelhos não oficiais, no Bluesky, de figuras públicas que só estão no X.</p>
         </div>
-        <div class="nx-app-actions"><a href="https://espelho.notx.blue" target="_blank" rel="noopener" class="db-btn db-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
+        <div class="nx-app-actions"><a href="https://espelho.notx.blue" target="_blank" rel="noopener" class="notx-btn notx-btn-primary cast press" data-i18n="open">Abrir projeto</a></div>
       </li>
       </ul></div></section>
-    <section class="db-panel cast mb-6" aria-labelledby="labels-title"><h2 class="db-panel-head" id="labels-title"><span data-i18n="labels">Etiquetas</span></h2><div class="p-4"><ul class="nx-links nx-link-list"><li><a href="https://bsky.app/profile/etiquetasdoorkut.bsky.social" target="_blank" rel="noopener" data-i18n="orkut">Etiquetas do Orkut</a> <a href="https://github.com/breakzplatform/orkut" target="_blank" rel="noopener" class="nx-source-link" data-i18n="source">Código-fonte</a></li></ul></div></section>
-    <section class="db-panel cast mb-6" aria-labelledby="bots-title"><h2 class="db-panel-head" id="bots-title"><span data-i18n="bots">Bots</span></h2><div class="p-4"><ul class="nx-links nx-link-list"><li><a href="https://bsky.app/profile/nflscorigami.bsky.social" target="_blank" rel="noopener" data-i18n="scorigami">NFL Scorigami (em inglês)</a></li><li><a href="https://bsky.app/profile/semanaencerrada.bsky.social" target="_blank" rel="noopener" data-i18n="week">Semana Encerrada</a></li><li><a href="https://bsky.app/profile/horariosoficiais.bsky.social" target="_blank" rel="noopener" data-i18n="hours">Horários Oficiais</a></li><li><a href="https://bsky.app/profile/obolsonaroestapreso.com" target="_blank" rel="noopener" data-i18n="bolsonaro">O Bolsonaro está preso?</a></li></ul></div></section>
-    <section class="db-panel cast mb-6" aria-labelledby="handles-title"><h2 class="db-panel-head" id="handles-title"><span data-i18n="handles">Mais domínios para seu handle</span></h2><div class="p-4"><ul class="nx-links nx-link-list"><li><a href="https://pessoas.dev" target="_blank" rel="noopener" data-i18n="pessoas">pessoas.dev</a></li><li><a href="https://ceuazul.online" target="_blank" rel="noopener" data-i18n="ceuazul">ceuazul.online</a></li></ul></div></section>
+    <section class="cast notx-panel" aria-labelledby="labels-title"><h2 class="notx-panel-head" id="labels-title"><span data-i18n="labels">Etiquetas</span></h2><div class="p-4"><ul class="nx-links nx-link-list"><li><a href="https://bsky.app/profile/etiquetasdoorkut.bsky.social" target="_blank" rel="noopener" data-i18n="orkut">Etiquetas do Orkut</a> <a href="https://github.com/breakzplatform/orkut" target="_blank" rel="noopener" class="nx-source-link" data-i18n="source">Código-fonte</a></li></ul></div></section>
+    <section class="cast notx-panel" aria-labelledby="bots-title"><h2 class="notx-panel-head" id="bots-title"><span data-i18n="bots">Bots</span></h2><div class="p-4"><ul class="nx-links nx-link-list"><li><a href="https://bsky.app/profile/nflscorigami.bsky.social" target="_blank" rel="noopener" data-i18n="scorigami">NFL Scorigami (em inglês)</a></li><li><a href="https://bsky.app/profile/semanaencerrada.bsky.social" target="_blank" rel="noopener" data-i18n="week">Semana Encerrada</a></li><li><a href="https://bsky.app/profile/horariosoficiais.bsky.social" target="_blank" rel="noopener" data-i18n="hours">Horários Oficiais</a></li><li><a href="https://bsky.app/profile/obolsonaroestapreso.com" target="_blank" rel="noopener" data-i18n="bolsonaro">O Bolsonaro está preso?</a></li></ul></div></section>
+    <section class="cast notx-panel" aria-labelledby="handles-title"><h2 class="notx-panel-head" id="handles-title"><span data-i18n="handles">Mais domínios para seu handle</span></h2><div class="p-4"><ul class="nx-links nx-link-list"><li><a href="https://pessoas.dev" target="_blank" rel="noopener" data-i18n="pessoas">pessoas.dev</a></li><li><a href="https://ceuazul.online" target="_blank" rel="noopener" data-i18n="ceuazul">ceuazul.online</a></li></ul></div></section>
     </main>
-    <footer class="pt-6">
-    <p class="db-meta mb-6 text-center"><span data-i18n="tagline">Projetos para o Bluesky</span> · <span data-i18n="by">feito por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a> · <a href="/privacy" data-i18n="privacy">Privacidade</a> · <a href="https://status.joseli.to/" target="_blank" rel="noopener" data-i18n="status">status</a> · <a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></p>
-    <p data-i18n="fromBrazil" class="db-note mb-6 text-center">Direto do Brasil pelo Joselito, com muito carinho. Este site não usa cookies nem coleta dados. Este site não tem relação com o Bluesky.</p>
-    <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
-      <span data-i18n="support" class="db-micro mr-1 text-text-3">Apoie</span>
-      <a href="https://pix.joseli.to" target="_blank" rel="noopener" class="db-chip db-chip-pix cast press" data-i18n="pix">Pix</a>
-      <a href="https://link.mercadopago.com.br/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-mercadopago cast press" data-i18n="mercadopago">Mercado Pago</a>
-      <a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="db-chip db-chip-coffee cast press" data-i18n="coffee">Buy Me a Coffee</a>
-      <a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="db-chip db-chip-sponsors cast press" data-i18n="sponsors">GitHub Sponsors</a>
+    <footer class="notx-footer">
+    <p class="notx-meta text-center"><span data-i18n="tagline">Projetos para o Bluesky</span> · <span data-i18n="by">feito por</span> <a href="https://bsky.app/profile/joseli.to" target="_blank" rel="noopener" data-i18n="author">@joseli.to</a> · <a href="/privacy" data-i18n="privacy">Privacidade</a> · <a href="https://status.joseli.to/" target="_blank" rel="noopener" data-i18n="status">status</a> · <a href="mailto:abuse@notx.blue" data-i18n="contact">abuse@notx.blue</a></p>
+    <p data-i18n="fromBrazil" class="notx-note text-center">Direto do Brasil pelo Joselito, com muito carinho. Este site não usa cookies nem coleta dados. Este site não tem relação com o Bluesky.</p>
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <span data-i18n="support" class="nx-micro mr-1 text-text-3">Apoie</span>
+      <a href="https://pix.joseli.to" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-pix text-on-pix" data-i18n="pix">Pix</a>
+      <a href="https://link.mercadopago.com.br/breakzplatform" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-mercadopago text-on-mercadopago" data-i18n="mercadopago">Mercado Pago</a>
+      <a href="https://buymeacoffee.com/joselito" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-yellow text-on-yellow" data-i18n="coffee">Buy Me a Coffee</a>
+      <a href="https://github.com/sponsors/breakzplatform" target="_blank" rel="noopener" class="notx-chip cast press bg-ink-sponsors text-on-sponsors" data-i18n="sponsors">GitHub Sponsors</a>
     </div>
   </footer>
   </div>
