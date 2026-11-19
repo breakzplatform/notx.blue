@@ -20,14 +20,16 @@ export function renderPage(page, language = 'pt-BR') {
   const item = entry => `${link(entry.url, entry.label)}${entry.source ? ` ${sourceLink(entry.source)}` : ''}`;
   const panel = (id, titleKey, body, { first = false, wrapper = 'section', headingTag = 'h2', bodyClasses = 'p-4' } = {}) =>
     `<${wrapper} class="cast notx-panel${first ? ' mt-15' : ''}" aria-labelledby="${id}"><${headingTag} class="notx-panel-head" id="${id}">${tagged('span', titleKey)}</${headingTag}><div class="${bodyClasses}">${body}</div></${wrapper}>`;
-  const separator = ' · ';
+  // Same rows as the other notx apps (sumidos.notx.blue): who made it, the
+  // fine print, the support chips, then the policy and contact links.
   const footer = `<footer class="notx-footer">
-    <p class="notx-meta text-center">${tagged('span', 'tagline')}${separator}${tagged('span', 'by')} ${link(site.author, 'author')}${separator}${link(site.privacy, 'privacy')}${separator}${link(site.status, 'status')}${separator}${link(site.contact, 'contact')}</p>
+    <p class="notx-meta notx-foot">${tagged('span', 'tagline')}<span>${tagged('span', 'by')} ${link(site.author, 'author')}</span></p>
     ${tagged('p', 'fromBrazil', ' class="notx-note text-center"')}
     <div class="flex flex-wrap items-center justify-center gap-2">
-      ${tagged('span', 'support', ' class="nx-micro mr-1 text-text-3"')}
+      ${tagged('span', 'support', ' class="notx-meta"')}
       ${support.map(entry => link(entry.url, entry.label, `notx-chip cast press bg-ink-${entry.ink} text-on-${entry.ink}`)).join('\n      ')}
     </div>
+    <p class="notx-meta notx-foot"><span>${link(site.privacy, 'privacy')}</span><span>${link(site.status, 'status')}</span><span>${link(site.contact, 'contact')}</span></p>
   </footer>`;
   const iconAttributes = 'width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"';
   const toggles = `<div class="flex flex-wrap items-center justify-end gap-2 pt-4">

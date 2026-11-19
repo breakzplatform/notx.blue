@@ -7,7 +7,7 @@ export default {
   "lead": "notx.blue é a casa dos projetos do Joselito para o Bluesky, por",
   "tagline": "Projetos para o Bluesky",
   "fromBrazil": "Direto do Brasil pelo Joselito, com muito carinho. Este site não usa cookies nem coleta dados. Este site não tem relação com o Bluesky.",
-  "support": "Apoie",
+  "support": "Apoie:",
   "themeButton": "Tema: {current}, toque para {next}",
   "theme.light": "claro",
   "theme.dark": "escuro",

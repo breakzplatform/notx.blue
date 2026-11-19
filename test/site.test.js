@@ -93,7 +93,7 @@ test('every footer has contact, privacy and the three support chips in order', a
     assert.deepEqual(support.map(entry => entry.label), ['pix', 'mercadopago', 'coffee', 'sponsors']);
     assert.deepEqual([...footer.matchAll(/<a href="([^"]+)"[^>]*class="notx-chip /g)].map(match => match[1]), support.map(entry => entry.url));
     assert.doesNotMatch(footer, /apoia\.se/);
-    assert.match(footer, /class="notx-meta text-center"/);
+    assert.equal(footer.match(/class="notx-meta notx-foot"/g).length, 2);
     assert.match(footer, /data-i18n="fromBrazil"/);
     assert.doesNotMatch(footer, /data-i18n="respect"/);
   }
