@@ -267,3 +267,10 @@ test('app sources render as neutral buttons and inline sources as links', () => 
   assert.equal(home.match(/class="nx-source-link" data-i18n="source"/g).length, 3);
   assert.ok(home.includes('href="https://github.com/breakzplatform/links.notx.blue"'));
 });
+
+test('the 404 page claims no canonical address', () => {
+  const html = renderPage('404');
+  assert.doesNotMatch(html, /rel="canonical"|og:url|404\.html/);
+  assert.match(html, /<meta name="robots" content="noindex">/);
+  assert.match(renderPage('privacy'), /<link rel="canonical" href="https:\/\/notx\.blue\/privacy">\n[\s\S]*<meta property="og:url" content="https:\/\/notx\.blue\/privacy">/);
+});

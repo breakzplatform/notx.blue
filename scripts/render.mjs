@@ -79,7 +79,8 @@ export function renderPage(page, language = 'pt-BR') {
   }
   const title = page === 'home' ? 'homeTitle' : page === 'privacy' ? 'privacyTitle' : 'notFoundTitle';
   const description = page === 'home' ? 'homeDescription' : page === 'privacy' ? 'privacyDescription' : 'notFoundDescription';
-  const canonical = site.origin + (page === 'home' ? '/' : page === 'privacy' ? '/privacy' : '/404.html');
+  // The 404 page answers for every missing path, so it has no address of its own.
+  const canonical = page === '404' ? null : site.origin + (page === 'home' ? '/' : '/privacy');
   return `<!doctype html>
 <html lang="${language}">
 <head>
@@ -87,14 +88,12 @@ export function renderPage(page, language = 'pt-BR') {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   ${tagged('title', title)}
   <meta name="description" data-i18n-content="${description}" content="${text(description)}">
-  ${page === '404' ? '<meta name="robots" content="noindex">' : ''}
-  <link rel="canonical" href="${canonical}">
+  ${canonical ? `<link rel="canonical" href="${canonical}">` : '<meta name="robots" content="noindex">'}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="notx.blue">
   <meta property="og:title" data-i18n-content="${title}" content="${text(title)}">
   <meta property="og:description" data-i18n-content="${description}" content="${text(description)}">
-  <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${site.origin}/share.png">
+${canonical ? `  <meta property="og:url" content="${canonical}">\n` : ''}  <meta property="og:image" content="${site.origin}/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
