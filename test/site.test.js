@@ -46,7 +46,7 @@ test('real app data is complete, unique and rendered', async () => {
     assert.equal(html.includes(`id="${app.id}"`), app.listed !== false, app.id);
     for (const language of Object.keys(dictionaries)) assert.ok(translate(app.description, language));
   }
-  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['sumidos', 'violet'], ['handles', 'orange'], ['espelho', 'espelho']]);
+  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sumidos', 'violet'], ['sorteio', 'magenta'], ['links', 'links-green'], ['share', 'purple'], ['handles', 'orange'], ['espelho', 'espelho']]);
   assert.equal(apps.find(app => app.id === 'links').source, 'https://github.com/breakzplatform/links.notx.blue');
   for (const url of externalUrls()) {
     assert.equal(new URL(url).protocol, 'https:');
