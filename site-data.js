@@ -21,7 +21,7 @@ export const apps = [
     { label: 'blueskyBot', links: [['downBotHandle', 'https://bsky.app/profile/down.blue']], source: 'https://github.com/breakzplatform/down-blue-bot' },
     { label: 'iosShortcut', links: [['shortcutAdd', 'https://www.icloud.com/shortcuts/aff431c40ab549ccae09202d8402384e']] },
   ] },
-  { id: 'sumidos', name: 'sumidos.notx.blue', description: 'app.sumidos', url: 'https://sumidos.notx.blue', ink: 'violet', localized: true, aliases: ['https://crickets.notx.blue'] },
+  { id: 'sumidos', name: 'sumidos.notx.blue', description: 'app.sumidos', url: 'https://sumidos.notx.blue', source: 'https://github.com/breakzplatform/sumidos.notx.blue', ink: 'violet', localized: true, aliases: ['https://crickets.notx.blue'] },
   { id: 'sorteio', name: 'sorteio.blue', description: 'app.sorteio', url: 'https://sorteio.blue', source: 'https://github.com/breakzplatform/skypicker.site', ink: 'magenta', localized: true, aliases: ['https://skypicker.site'] },
   { id: 'links', name: 'links.notx.blue', description: 'app.links', url: 'https://links.notx.blue', source: 'https://github.com/breakzplatform/links.notx.blue', ink: 'links-green' },
   { id: 'share', name: 'share.notx.blue', description: 'app.share', url: 'https://share.notx.blue', source: 'https://github.com/breakzplatform/share.notx.blue', ink: 'purple' },
