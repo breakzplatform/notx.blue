@@ -24,11 +24,11 @@ export const apps = [
   { id: 'sorteio', name: 'sorteio.blue', description: 'app.sorteio', url: 'https://sorteio.blue', source: 'https://github.com/breakzplatform/skypicker.site', ink: 'magenta', localized: true, aliases: ['https://skypicker.site'] },
   { id: 'share', name: 'share.notx.blue', description: 'app.share', url: 'https://share.notx.blue', source: 'https://github.com/breakzplatform/share.notx.blue', ink: 'purple' },
   { id: 'links', name: 'links.notx.blue', description: 'app.links', url: 'https://links.notx.blue', source: 'https://github.com/breakzplatform/links.notx.blue', ink: 'links-green' },
+  { id: 'sumidos', name: 'sumidos.notx.blue', description: 'app.sumidos', url: 'https://sumidos.notx.blue', ink: 'violet', localized: true, aliases: ['https://crickets.notx.blue'] },
   { id: 'handles', name: 'handles.notx.blue', description: 'app.handles', url: 'https://handles.notx.blue', source: 'https://github.com/breakzplatform/bsky-public-handles', ink: 'orange' },
   { id: 'espelho', name: 'espelho', description: 'app.espelho', url: 'https://espelho.notx.blue', ink: 'espelho' },
   { id: 'enquete', name: 'enquete.notx.blue', description: 'app.enquete', url: 'https://enquete.notx.blue', status: 'soon', listed: false },
   { id: 'trending', name: 'trending.notx.blue', description: 'app.trending', url: 'https://github.com/breakzplatform/trending.notx.blue', openLabel: 'viewRepository', status: 'archived', listed: false },
-  { id: 'sumidos', name: 'sumidos.notx.blue', description: 'app.sumidos', url: 'https://sumidos.notx.blue', localized: true, listed: false, privacy: true },
   { id: 'print', name: 'print.notx.blue', description: 'app.print', url: 'https://print.notx.blue', listed: false },
 ];
 

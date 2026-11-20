@@ -55,7 +55,7 @@ export function renderPage(page, language = 'pt-BR') {
         : link(app.url, app.openLabel || 'open', 'notx-btn notx-btn-primary cast press');
       return `<li class="nx-app cast-flat nx-ink-${app.ink}" id="${app.id}">
         <div>
-          <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.name"` : ''}>${escape(app.localized ? name('name') : app.name.replace(/\.notx\.blue$/, ''))}</h3>
+          <h3 class="nx-app-name"${app.localized ? ` data-i18n="app.${app.id}.title"` : ''}>${escape(app.localized ? name('title') : app.name.replace(/\.notx\.blue$/, ''))}</h3>
           ${tagged('p', app.description, ' class="nx-app-text"')}${app.status ? `\n          ${tagged('p', app.status, ' class="nx-app-aside"')}` : ''}${app.aliases ? `\n          <p class="nx-app-aside">${tagged('span', 'alsoAt')} ${app.aliases.map(aliasLink).join(', ')}</p>` : ''}
         </div>
         <div class="nx-app-actions">${app.source ? sourceButton(app.source, '') : ''}${openButton}</div>${app.rows ? app.rows.map(row => `

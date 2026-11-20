@@ -38,7 +38,7 @@ test('real app data is complete, unique and rendered', async () => {
     assert.equal(new Set(apps.map(app => app[property])).size, apps.length);
   }
   assert.equal(new Set(listed.map(app => app.ink)).size, listed.length);
-  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending', 'sumidos', 'print']);
+  assert.deepEqual(apps.filter(app => app.listed === false).map(app => app.id), ['enquete', 'trending', 'print']);
   for (const app of apps) {
     assert.ok(app.name);
     assert.equal(new URL(app.url).protocol, 'https:');
@@ -46,7 +46,7 @@ test('real app data is complete, unique and rendered', async () => {
     assert.equal(html.includes(`id="${app.id}"`), app.listed !== false, app.id);
     for (const language of Object.keys(dictionaries)) assert.ok(translate(app.description, language));
   }
-  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['handles', 'orange'], ['espelho', 'espelho']]);
+  assert.deepEqual(listed.map(app => [app.id, app.ink]), [['down', 'down'], ['sorteio', 'magenta'], ['share', 'purple'], ['links', 'links-green'], ['sumidos', 'violet'], ['handles', 'orange'], ['espelho', 'espelho']]);
   assert.equal(apps.find(app => app.id === 'links').source, 'https://github.com/breakzplatform/links.notx.blue');
   for (const url of externalUrls()) {
     assert.equal(new URL(url).protocol, 'https:');
@@ -220,8 +220,8 @@ test('home: one projects panel with the listed apps, then compact labels, bots a
     const html = renderPage('home', language);
     const panels = [...html.matchAll(/<section class="cast notx-panel[^"]*" aria-labelledby="([^"]+)">/g)].map(match => match[1]);
     assert.deepEqual(panels, ['projects-title', 'labels-title', 'bots-title', 'handles-title']);
-    assert.equal([...html.matchAll(/class="nx-app cast-flat nx-ink-/g)].length, 6);
-    assert.equal([...html.matchAll(/class="notx-btn notx-btn-primary cast press"/g)].length, 6);
+    assert.equal([...html.matchAll(/class="nx-app cast-flat nx-ink-/g)].length, 7);
+    assert.equal([...html.matchAll(/class="notx-btn notx-btn-primary cast press"/g)].length, 7);
     assert.doesNotMatch(html, /enquete\.notx\.blue|trending\.notx\.blue/);
     const labels = html.match(/id="labels-title">([\s\S]*?)<\/section>/)[1];
     const bots = html.match(/id="bots-title">([\s\S]*?)<\/section>/)[1];
@@ -238,9 +238,12 @@ test('privacy leaves out apps hidden from the home page', () => {
   for (const id of ['enquete', 'trending']) assert.ok(!html.includes(`id="privacy-${id}"`));
 });
 
-test('sumidos has no home card but is covered on /privacy, named per language', () => {
-  assert.ok(!renderPage('home').includes('id="sumidos"'));
-  for (const [language, name] of Object.entries({ 'pt-BR': 'sumidos.notx.blue', en: 'crickets.notx.blue' })) {
+test('sumidos is on the home page and /privacy, named per language with the other name as alias', () => {
+  for (const [language, [name, alias]] of Object.entries({ 'pt-BR': ['sumidos.notx.blue', 'crickets.notx.blue'], en: ['crickets.notx.blue', 'sumidos.notx.blue'] })) {
+    const home = renderPage('home', language).match(/<li class="nx-app[^"]*" id="sumidos">([\s\S]*?)<\/li>/)[1];
+    assert.match(home, new RegExp(`<h3 class="nx-app-name"[^>]*>${name.split('.')[0]}</h3>`));
+    assert.match(home, new RegExp(`href="https://${name.replaceAll('.', '\\.')}"[^>]*class="notx-btn notx-btn-primary`));
+    assert.match(home, new RegExp(`data-i18n="alsoAt">[^<]*</span> <a href="https://${alias.replaceAll('.', '\\.')}"`));
     assert.match(renderPage('privacy', language), new RegExp(`<section id="privacy-sumidos"><h2 data-i18n="app.sumidos.name">${name.replaceAll('.', '\\.')}</h2>`));
   }
 });

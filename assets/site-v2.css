@@ -20,6 +20,7 @@
 .nx-ink-down { --project-ink: var(--ink-down); --project-ink-contrast: var(--on-down); }
 .nx-ink-magenta { --project-ink: var(--ink-magenta); --project-ink-contrast: var(--on-magenta); }
 .nx-ink-purple { --project-ink: var(--ink-purple); --project-ink-contrast: var(--on-purple); }
+.nx-ink-violet { --project-ink: var(--ink-violet); --project-ink-contrast: var(--on-violet); }
 .nx-ink-orange { --project-ink: var(--ink-orange); --project-ink-contrast: var(--on-orange); }
 .nx-ink-links-green { --project-ink: #2E6B3F; --project-ink-contrast: #FFFFFF; }
 .nx-ink-espelho { --project-ink: #000000; --project-ink-contrast: #FFFFFF; }
